@@ -15,8 +15,13 @@ __Authors__
 
 > Contact: wend.yam.donald.davy.ouedraogo@usherbrooke.ca
 
+[-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
 <!-- GETTING STARTED -->
 <h2 id="getting-started"> :book: Getting Started</h2>
+
+<!-- PROJECT FILES DESCRIPTION -->
+<h3 id="requirements"> :floppy_disk: Project Files Description</h3>
 
 __Requirements__
 *   python3 (at leat python 3.6)
@@ -25,7 +30,19 @@ __Requirements__
 *   Numpy
 *   ETE toolkit
 
+<!-- OVERVIEW -->
+<h3 id="overview"> :cloud: Overview</h3>
+
+[-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+<!--How to execute the algorithm -->
+<h2 id="getting-started"> :book: Main commands</h2>
+
 __Command__
+
+
+[-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+<!-- PROJECT FILES DESCRIPTION -->
+<h2 id="getting-started"> :book: PROJECT FILES DESCRIPTION</h2>
 
 __Inputs description__
 
