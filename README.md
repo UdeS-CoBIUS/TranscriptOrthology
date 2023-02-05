@@ -112,7 +112,7 @@
     <td>float number between 0 and 1</td>
   </tr>
   <tr>
-    <td>-outf | -outputfolder</td>
+    <td>-outf | --outputfolder</td>
     <td>folder to save results. The lauching program folder is set by default.</td>
     <td>String</td>
   </tr>
