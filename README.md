@@ -8,12 +8,12 @@
 <img src='./theme.png' alt='theme' width=auto height=300>
 </p>
 
-__Authors__
-*Ouedraogo Wend Yam Donald Davy & Aida Ouangraoua, CoBIUS LAB, Department of Computer Science, Faculty of Science USherbrooke,  Sherbrooke, Canada*
+:busts_in_silhouette: __Authors__
+*Wend Yam Donald Davy Ouedraogo & Aida Ouangraoua, CoBIUS LAB, Department of Computer Science, Faculty of Science USherbrooke,  Sherbrooke, Canada*
 
-> If your are using our algorithm, please cite our recent paper: 
+> :bulb: If you are using our algorithm in your research, please cite our recent paper: __Upcoming__ 
 
-> Contact: wend.yam.donald.davy.ouedraogo@usherbrooke.ca
+> :e-mail: Contact: wend.yam.donald.davy.ouedraogo@usherbrooke.ca
 
 
 <!-- TABLE OF CONTENTS -->
@@ -72,10 +72,58 @@ __Authors__
 
 
 <!-- Main Command -->
-<h3 id="main"> :computer: Main command</h3>
+<h3 id="main"> :computer: Main Command</h3>
 
-__Command__
+> Command
 
+<pre><code>$ python3 transcriptOrthology.py [-talg transcripts alignment] [-galg genes alignment] [-gtot gene to transcripts mappings] [-nhxt NHX gene tree] [-lowb lower bound] [-outf output folder]</code></pre>
+
+>> Details
+
+<table>
+<tr>
+    <th>argument</th>
+    <th>definition</th>
+    <th>format</th>
+  </tr>
+  <tr>
+    <td>-talg | --transcriptsalignment</td>
+    <td>MSA of transcripts</td>
+    <td>FASTA format</td>
+  </tr>
+  <tr>
+    <td>-galg | --genesalignment</td>
+    <td>MSA of genes</td>
+    <td>FASTA format</td>
+  </tr>
+  <tr>
+    <td>-gtot | --genetotranscripts</td>
+    <td>mappings g(t)</td>
+    <td>FASTA format >id_transcript:id_gene</td>
+  </tr>
+  <tr>
+    <td>-nhxt | --nhxtgenetree</td>
+    <td>gene tree</td>
+    <td>NHX format</td>
+  </tr>
+  <tr>
+    <td>-lowb | --lowerbound</td>
+    <td>a lower bound to select RBHs transcripts. By default equals to 0.5</td>
+    <td>float number between 0 and 1</td>
+  </tr>
+  <tr>
+    <td>-outf | -outputfolder</td>
+    <td>folder to save results. The lauching program folder is set by default.</td>
+    <td>String</td>
+  </tr>
+</table>
+
+> Usage
+
+<pre><code>python3 ./scripts/transcriptOrthology.py -talg ./execution/inputs/transcripts_alignments/ENSGT00390000000715.alg -galg ./execution/inputs/genes_alignments/ENSGT00390000000715.alg -gtot ./execution/inputs/transcripts_alignments/ENSGT00390000000715.fasta 
+-nhxt ./execution/inputs/NHX_trees/ENSGT00390000000715.nwk -lowb 0.7 -outf ./execution/outputs/ </code></pre>
+
+> 
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -87,17 +135,39 @@ __Command__
 
 __Inputs description__
 
+> <em>tsm-computing()</em> :arrow_right: returns the similarity matrix tsm+ scores for all pairs of homologous transcripts.
+
+> <em>t-clustering()</em> :arrow_right: returns the orthology graph of transcripts.
+
+> <em>inferring-homologies()</em> :arrow_right: returns for each pair of homologous transcripts, their homology relationship type (recent-paralogs, ortho-paralogs or ortho-orthologs).
+
 --- 
 
 <h3 id="project-files-description-outputs"> :minidisc: Outputs description </h3>
 
 __Outputs description__
 
---- 
+> similarity matrix score that present the tsm+ score between each pair of homologous transcripts.
+
+> orthology graph at the start of the algorithm showing only the pair relationships between recent-paralogs. (:warning:only retrieved if the number of transcripts is not greater than 20)
+
+> orthology graph at the end of the algorithm showing all the relationships between pairs of isoorthologues.(:warning:only retrieved if the number of transcripts is not greater than 20)
+
+> csv file resuming the information of the isoorthology-clustering.
 
 <h3 id="project-files-description-data"> :heavy_check_mark: Dataset </h3>
 
-__Dataset description__
+***The folder data contains dataset used for the studies and also the results obtained.***
+
+<br>
+---
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+Copyright © 2023 CoBIUS LAB
 
 
 
