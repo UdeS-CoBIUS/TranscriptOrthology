@@ -15,6 +15,9 @@ __Authors__
 
 > Contact: wend.yam.donald.davy.ouedraogo@usherbrooke.ca
 
+<!-- GETTING STARTED -->
+<h2 id="getting-started"> :book: Getting Started</h2>
+
 __Requirements__
 *   python3 (at leat python 3.6)
 *   NetworkX
