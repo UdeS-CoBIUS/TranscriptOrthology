@@ -38,14 +38,14 @@ def inferring_transcripts_isoortholoy(transcripts_msa_path, genes_msa_path,gtot_
         get_matrix(transcripts_msa_path, genes_msa_path, gtot_path, tsm_conditions, output_folder_path)
         matrix_path = '{}/{}.csv'.format(output_folder_path, 'matrix')
     except:
-        raise('Impossible to retrieve the matrix ! Errors occured ...')
+        raise('Failed to retrieve the matrix ! Errors occured ...')
     
     try:
         get_orthology_graph(matrix_path, gtot_path, gt_path, lower_bound, output_folder_path)
     except:
-        raise('Impossible de retrieve transcripts orthologs! Errors occured ... ')
+        raise('Failed to retrieve transcripts orthologs! Errors occured ... ')
     
-    print('++++++++++++++++Finished \n\n Succesful. Data results can be found in {}'.format(output_folder_path))
+    print('++++++++++++++++Finished \n\n Successful. Data results can be found in {}'.format(output_folder_path))
     return True
 
 if __name__ == '__main__':
