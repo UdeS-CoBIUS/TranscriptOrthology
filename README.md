@@ -104,17 +104,17 @@ optional arguments:
   <tr>
     <td>-talg</br>--tralignment</td>
     <td>MSA of transcripts</td>
-    <td>FASTA format </br> >{id_transcript}\n{sequence}</td>
+    <td>FASTA format </br>>{id_transcript}\n{sequence}</td>
   </tr>
   <tr>
     <td>-galg</br>--genesalignment</td>
     <td>MSA of genes</td>
-    <td>FASTA format </br> >{id_gene}\n{sequence}</td>
+    <td>FASTA format</br>>{id_gene}\n{sequence}</td>
   </tr>
   <tr>
     <td>-gtot </br>--genetotranscripts</td>
     <td>mappings g(t)</td>
-    <td>FASTA format </br> >{id_transcript}:{id_gene}\n</td>
+    <td>FASTA format</br>>{id_transcript}:{id_gene}\n</td>
   </tr>
   <tr>
     <td>-nhxt</br> --nhxtgenetree</td>
@@ -212,7 +212,7 @@ __Outputs files__
 
 <ul>
     <li>:one: <b>matrix.csv</b> : similarity matrix score that present the tsm+ score between each pair of homologous transcripts.</li>
-    <li>:two: <b>blocks_transcripts.csv|blocks_genes</b> : csv file describing the representation of blocks for each transcript(resp. gene).</li>
+    <li>:two: <b>blocks_transcripts.csv|blocks_genes.csv</b> : csv file describing the representation of blocks for each transcript(resp. gene).</li>
     <li>:three: <b>start_orthology_graph.pdf|end_orthology_graph.pdf</b> : orthology graph at the start of the algorithm(resp. at the end of the algorithm) showing only the pair relationships between recent-paralogs(resp. all the orthologous clusters). (:warning:only retrieved if the number of transcripts is not greater than 20)</li>
     <li>:four: <b>groupsOfOrthoogs.csv|relationsOrthology.csv</b> : csv files resuming the information of the isoorthology-clustering.</li>
 </ul>
