@@ -23,7 +23,7 @@ from tsmComputing import get_matrix
 def build_arg_parser():
     '''Parsing function'''
     parser = argparse.ArgumentParser(description="parsor program parameter")
-    parser.add_argument('-talg', '--transcriptsalignment', default=None)
+    parser.add_argument('-talg', '--tralignment', default=None)
     parser.add_argument('-galg', '--genesalignment', default=None)
     parser.add_argument('-gtot', '--genetotranscripts', default=None)
     parser.add_argument('-nhxt', '--nhxgenetree', default=None)
@@ -32,10 +32,20 @@ def build_arg_parser():
     parser.add_argument('-outf', '--outputfolder', default='.')
     return parser
 
-def main_function(transcripts_msa_path, genes_msa_path,gtot_path, gt_path, tsm_conditions, output_folder_path, lower_bound):
-    get_matrix(transcripts_msa_path, genes_msa_path, gtot_path, tsm_conditions, output_folder_path)
-    matrix_path = '{}/{}.csv'.format(output_folder_path, 'matrix')
-    get_orthology_graph(matrix_path, gtot_path, gt_path, lower_bound, output_folder_path)
+def inferring_transcripts_isoortholoy(transcripts_msa_path, genes_msa_path,gtot_path, gt_path, tsm_conditions, output_folder_path, lower_bound):
+    """inferring transcript isoorthologies"""
+    try:
+        get_matrix(transcripts_msa_path, genes_msa_path, gtot_path, tsm_conditions, output_folder_path)
+        matrix_path = '{}/{}.csv'.format(output_folder_path, 'matrix')
+    except:
+        raise('Impossible to retrieve the matrix ! Errors occured ...')
+    
+    try:
+        get_orthology_graph(matrix_path, gtot_path, gt_path, lower_bound, output_folder_path)
+    except:
+        raise('Impossible de retrieve transcripts orthologs! Errors occured ... ')
+    
+    print('++++++++++++++++Finished \n\n Succesful. Data results can be found in {}'.format(output_folder_path))
     return True
 
 if __name__ == '__main__':
@@ -44,12 +54,12 @@ if __name__ == '__main__':
     gtot_path = args.genetotranscripts
     gt_path = args.nhxgenetree
     lower_bound = float(args.lowerbound)
-    transcripts_msa_path = args.transcriptsalignment
+    transcripts_msa_path = args.tralignment
     genes_msa_path = args.genesalignment
     tsm_conditions = args.tsmuncorrected
     output_folder_path = args.outputfolder
 
-    #compute the algorithm
-    main_function(transcripts_msa_path, genes_msa_path,gtot_path, gt_path, tsm_conditions, output_folder_path, lower_bound)
+    #compute the main algorithm
+    inferring_transcripts_isoortholoy(transcripts_msa_path, genes_msa_path,gtot_path, gt_path, tsm_conditions, output_folder_path, lower_bound)
     
     

@@ -18,7 +18,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import argparse
 import warnings
-#import time
+import time
 from ete3 import Tree
 
 def build_arg_parser():
@@ -34,12 +34,44 @@ def build_arg_parser():
 def get_orthology_graph(matrix_path, gtot_path, gt_path, lower_bound, output_folder_path):
     df_gtot = convert_inputs_data(gtot_path)
     matrix = pd.read_csv(matrix_path, sep=';', index_col=0)
-    recent_paralogs = search_recent_paralogs(matrix, df_gtot)
-    graphG = rhb_clustering(matrix, df_gtot, recent_paralogs, lower_bound)
-    clusters = get_conserved_clusters(graphG, recent_paralogs, df_gtot)
-    write_results(clusters, df_gtot, matrix, gt_path, output_folder_path)
+    try:
+        start1 = time.time()
+        print('+++++ Searching for recent-paralogs ... \tstatus: processing')
+        recent_paralogs = search_recent_paralogs(matrix, df_gtot)
+        end1 = time.time()
+        print('+++++ Searching for recent-paralogs ... \tstatus: finished in {} seconds'.format(str(end1-start1)))
+    except:
+        raise('Failed to retrieve recent-paralogs ! Errors occured.')
+    
+    try:
+        start2 = time.time()
+        print('+++++ Searching for RBHs ... \tstatus: processing')
+        graphG = rhb_clustering(matrix, df_gtot, recent_paralogs, lower_bound)
+        end2 = time.time()
+        print('+++++ Searching for RBHs ... \tstatus: finished in {} seconds'.format(str(end2-start2)))
+    except:
+        raise('Failed to retrieve RBHs ! Errors occured.')
+    
+    try:
+        start3 = time.time()
+        print('+++++ Construction of the orthology graph (Adding nodes ...) ... \tstatus: processing')
+        clusters = get_conserved_clusters(graphG, recent_paralogs, df_gtot, output_folder_path)
+        end3 = time.time()
+        print('+++++ Construction of the orthology graph (Adding nodes ...) ... \tstatus: finished in {} seconds'.format(str(end3-start3)))
+    except:
+        raise('Failed to retrieve connected components ! Errors occured.')
+    
+    try:
+        start4 = time.time()
+        print('+++++ Searching for connected components ... \tstatus: processing')
+        write_results(clusters, df_gtot, matrix, gt_path, output_folder_path)
+        end4 = time.time()
+        print('+++++ Searching for connected components ... \tstatus: finished in {} seconds'.format(str(end3-start3)))
 
-    return True
+    except:
+        raise('Failed to save results ! Errors occured.')
+
+    return clusters, graphG
 
 def convert_inputs_data(gtot_path):
     df_gtot = pd.DataFrame(columns=['id_transcript','id_gene'])
@@ -148,15 +180,20 @@ def rhb_clustering(matrix, g, inparalogs, lower_bound):
     df_edges_rbhs = pd.DataFrame(data={'pair_id': pair_id, 'pair_ref': pair_ref, 'score': score_pair})
     return G, df_edges_rbhs
 
-def get_conserved_clusters(graphData, inParalogs, g):
+def get_conserved_clusters(graphData, inParalogs, g, output):
     """Returns the conserved clusters -- inference of transcripts homologies"""
+    is_saving = False
+    if(len(list(g.id_transcript.values))) <= 20:
+       is_saving = True
 
     #Retrieve data
     G = graphData[0]
     edges_data = graphData[1]
 
-    #nx.draw(G, with_labels=True)
-    #plt.show(G)
+    if is_saving:
+        nx.draw(G, with_labels=True)
+        plt.savefig('{}/start_orthology_graph.pdf'.format(output))
+        #plt.show(G)
 
     edges_data = edges_data.sort_values(by=['score'], ascending=False)
 
@@ -207,8 +244,11 @@ def get_conserved_clusters(graphData, inParalogs, g):
                 #if len(inter_set) == max(len(set_id), len(set_ref)):
                     G.add_edge(transcript_id, transcript_ref)
 
-    #nx.draw(G, with_labels=True)
-    #plt.show(G)
+    if is_saving:
+        plt.clf()
+        nx.draw(G, with_labels=True)
+        #plt.show(G)
+        plt.savefig('{}/end_orthology_graph.pdf'.format(output))
     clusters_components = [list(G.subgraph(c).copy()) for c in nx.connected_components(G)]
     return clusters_components
 

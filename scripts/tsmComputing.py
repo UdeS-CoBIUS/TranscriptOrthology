@@ -13,16 +13,14 @@ __copyright__ = "CoBIUS lab at Université de Sherbrooke, QC, CANADA"
 __date__ = "2022-12-19"
 __version__= "1.0.0"
 
-import sys
 import pandas as pd
-import numpy as np
 import argparse
 import time
 
 def build_arg_parser():
     '''Parsing function'''
     parser = argparse.ArgumentParser(description="parsor program parameter")
-    parser.add_argument('-talg', '--transcriptsalignment', default=None)
+    parser.add_argument('-talg', '--tralignment', default=None)
     parser.add_argument('-galg', '--genesalignment', default=None)
     parser.add_argument('-gtot', '--genetotranscripts', default=None)
     parser.add_argument('-tsm', '--tsmuncorrected', default=False)
@@ -36,20 +34,20 @@ def saving_files(file, outputfolder, name, ind):
 def get_matrix(transcripts_msa_path, genes_msa_path, gtot_path, tsm_condition, output_folder_path):
     '''Returns the matrix score'''
     try:
-        print('++++++++++++++++Starting ....')
+        print('\n\n++++++++++++++++Starting ....')
         start = time.time()
         df_transcripts, df_genes, df_gtot, df_blocks_transcripts, df_blocks_genes = convert_files_to_dataframes(transcripts_msa_path, genes_msa_path, gtot_path, output_folder_path)
-        print('+++++++ All data retrieved & the representation of subtranscribed sequences of genes into blocks are available.')
+        print('+++++++ All data were retrieved & the representation of subtranscribed sequences of genes into blocks are available.')
     except:
         raise('Something wrong with the inputs! Please check it out or contact us. Thank you.')
     
     try:
-        print('------- Computing matrix ... in progress')
+        print('+++++ Computing matrix ...\t in progress')
         tsm_matrix = compute_matrix(df_transcripts, df_genes, df_gtot, df_blocks_transcripts, df_blocks_genes, tsm_condition)
         #saving matrix
         saving_files(tsm_matrix, output_folder_path, 'matrix', True)
         end = time.time()
-        print('------- Computing matrix ... status: Finished without errors in {} seconds'.format(str(end-start)))
+        print('+++++ Computing matrix ...\t status: Finished without errors in {} seconds'.format(str(end-start)))
     except:
         raise('The algorithm exits with errors!! Please contact us for help. Thank you.')
     
@@ -349,7 +347,7 @@ def compute_nuchom_score(transcript_1, transcript_2, data_alg_seq):
 if __name__ == '__main__':
     # retrieve inputs given by user
     args = build_arg_parser().parse_args()
-    transcripts_msa_path = args.transcriptsalignment
+    transcripts_msa_path = args.tralignment
     genes_msa_path = args.genesalignment
     gtot_path = args.genetotranscripts
     tsm_conditions_path = args.tsmuncorrected
