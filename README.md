@@ -9,7 +9,7 @@
 </p>
 
 :busts_in_silhouette: __Authors__
-* `Wend Yam Donald Davy Ouedraogo & Aida Ouangraoua`, CoBIUS LAB, Department of Computer Science, Faculty of Science, Université de Sherbrooke, Sherbrooke, Canada*
+`Wend Yam Donald Davy Ouedraogo & Aida Ouangraoua`, CoBIUS LAB, Department of Computer Science, Faculty of Science, Université de Sherbrooke, Sherbrooke, Canada*
 
 > :bulb: If you are using our algorithm in your research, please cite our recent paper: __Upcoming__ 
 
@@ -58,7 +58,7 @@
 <!-- Requirements -->
 <h3 id="requirements"> :hammer_and_pick: Requirements</h3>
 
-*   __`python3 (at leat python 3.6)`__
+*   __`python3 (at least python 3.6)`__
 *   __`NetworkX`__
 *   __`Pandas`__
 *   __`Numpy`__
