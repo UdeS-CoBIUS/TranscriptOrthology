@@ -153,7 +153,7 @@ optional arguments:
 +++++ Searching for connected components ...    status: finished in 0.536250114440918 seconds
 ++++++++++++++++Finished 
 
- Succesful. Data results can be found in ./execution/outputs/
+ Successful. Data results can be found in ./execution/outputs/
 </code></pre>
 
 
