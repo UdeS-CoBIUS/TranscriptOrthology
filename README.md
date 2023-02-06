@@ -1,7 +1,7 @@
 
 # :dna: Inferring clusters of orthologous and paralogous transcripts
 
-***Algorithm to infer clusters of isoorthologous transcripts using gene-level homology relationships and a Reciprocal Best Hits approach***
+***``Algorithm to infer clusters of isoorthologous transcripts using gene-level homology relationships and a Reciprocal Best Hits approach``***
 
 
 <p align="center">
@@ -9,7 +9,7 @@
 </p>
 
 :busts_in_silhouette: __Authors__
-`Wend Yam Donald Davy Ouedraogo & Aida Ouangraoua`, CoBIUS LAB, Department of Computer Science, Faculty of Science, Université de Sherbrooke, Sherbrooke, Canada*
+`Wend Yam Donald Davy Ouedraogo & Aida Ouangraoua`, CoBIUS LAB, Department of Computer Science, Faculty of Science, Université de Sherbrooke, Sherbrooke, Canada
 
 > :bulb: If you are using our algorithm in your research, please cite our recent paper: __Upcoming__ 
 
