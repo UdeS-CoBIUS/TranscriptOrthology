@@ -53,7 +53,7 @@ def get_matrix(transcripts_msa_path, genes_msa_path, gtot_path, tsm_condition, o
     except:
         raise('The algorithm exits with errors!! Please contact us for help. Thank you.')
     
-    return True
+    return tsm_matrix
 
 def convert_files_to_dataframes(transcripts_msa_path,genes_msa_path,gtot_path, output_folder_path):
     """Format inputs of users into Pandas DataFrames"""
@@ -79,7 +79,7 @@ def convert_files_to_dataframes(transcripts_msa_path,genes_msa_path,gtot_path, o
     file_gtot = open(gtot_path, 'r')
     gtot_rows = [str(_).split('\n')[0] for _ in file_gtot.readlines()]
     file_gtot.close()
-    for gtot_number, row_gtot in enumerate(gtot_rows):
+    for row_gtot in gtot_rows:
         if row_gtot.startswith('>'):
             df_gtot.loc[row_gtot] = [row_gtot.split(':')[0].split('>')[-1], row_gtot.split(':')[-1]]
     
@@ -348,7 +348,6 @@ def compute_nuchom_score(transcript_1, transcript_2, data_alg_seq):
 
 if __name__ == '__main__':
     # retrieve inputs given by user
-    inputs_paths = sys.path[0]
     args = build_arg_parser().parse_args()
     transcripts_msa_path = args.transcriptsalignment
     genes_msa_path = args.genesalignment

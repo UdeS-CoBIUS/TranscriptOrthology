@@ -76,7 +76,7 @@
 
 > Command
 
-<pre><code>$ python3 transcriptOrthology.py [-talg transcripts alignment] [-galg genes alignment] [-gtot gene to transcripts mappings] [-nhxt NHX gene tree] [-lowb lower bound] [-outf output folder]</code></pre>
+<pre><code>$ python3 transcriptOrthology.py [-h] [-talg transcripts alignment] [-galg genes alignment] [-gtot gene to transcripts mappings] [-nhxt NHX gene tree] [-lowb lower bound] [-outf output folder]</code></pre>
 
 >> Details
 
@@ -120,8 +120,7 @@
 
 > Usage
 
-<pre><code>python3 ./scripts/transcriptOrthology.py -talg ./execution/inputs/transcripts_alignments/ENSGT00390000000715.alg -galg ./execution/inputs/genes_alignments/ENSGT00390000000715.alg -gtot ./execution/inputs/transcripts_alignments/ENSGT00390000000715.fasta 
--nhxt ./execution/inputs/NHX_trees/ENSGT00390000000715.nwk -lowb 0.7 -outf ./execution/outputs/ </code></pre>
+<pre><code>python3 ./scripts/transcriptOrthology.py -talg ./execution/inputs/transcripts_alignments/ENSGT00390000000104.alg -galg ./execution/inputs/genes_alignments/ENSGT00390000000104.alg -gtot ./execution/inputs/mapping_gene_to_transcripts/ENSGT00390000000104.fasta -nhxt ./execution/inputs/NHX_trees/ENSGT00390000000104.nwk -lowb 0.7 -outf ./execution/outputs/</code></pre>
 
 > 
 
@@ -149,11 +148,16 @@ __Outputs description__
 
 > similarity matrix score that present the tsm+ score between each pair of homologous transcripts.
 
+> csv file describing the representation of blocks for each transcript.
+
+> csv file describing the representation of blocks for each gene.
+
 > orthology graph at the start of the algorithm showing only the pair relationships between recent-paralogs. (:warning:only retrieved if the number of transcripts is not greater than 20)
 
 > orthology graph at the end of the algorithm showing all the relationships between pairs of isoorthologues.(:warning:only retrieved if the number of transcripts is not greater than 20)
 
 > csv file resuming the information of the isoorthology-clustering.
+
 
 <h3 id="project-files-description-data"> :heavy_check_mark: Dataset </h3>
 
