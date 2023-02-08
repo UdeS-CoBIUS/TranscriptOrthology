@@ -142,15 +142,15 @@ optional arguments:
 <pre><code>++++++++++++++++Starting ....
 +++++++ All data were retrieved & the representation of subtranscribed sequences of genes into blocks are available.
 +++++ Computing matrix ...       in progress
-+++++ Computing matrix ...       status: Finished without errors in 1.430955410003662 seconds
++++++ Computing matrix ...       status: Finished without errors in 0.8071668148040771 seconds
 +++++ Searching for recent-paralogs ...         status: processing
-+++++ Searching for recent-paralogs ...         status: finished in 0.10488486289978027 seconds
++++++ Searching for recent-paralogs ...         status: finished in 0.11053657531738281 seconds
 +++++ Searching for RBHs ...    status: processing
-+++++ Searching for RBHs ...    status: finished in 0.10737109184265137 seconds
++++++ Searching for RBHs ...    status: finished in 0.10251045227050781 seconds
 +++++ Construction of the orthology graph (Adding nodes ...) ...        status: processing
-+++++ Construction of the orthology graph (Adding nodes ...) ...        status: finished in 0.536250114440918 seconds
++++++ Construction of the orthology graph (Adding nodes ...) ...        status: finished in 0.4378941059112549 seconds
 +++++ Searching for connected components ...    status: processing
-+++++ Searching for connected components ...    status: finished in 0.536250114440918 seconds
++++++ Searching for connected components ...    status: finished in 0.4378941059112549 seconds
 ++++++++++++++++Finished 
 
  Successful. Data results can be found in ./execution/outputs/
