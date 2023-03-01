@@ -1,7 +1,7 @@
 
 # :dna: Inferring clusters of orthologous and paralogous transcripts
 
-***Algorithm to infer clusters of isoorthologous transcripts using gene-level homology relationships and a Reciprocal Best Hits approach***
+``Algorithm to infer clusters of isoorthologous transcripts using gene-level homology relationships and a Reciprocal Best Hits approach``
 
 
 <p align="center">
@@ -13,7 +13,7 @@
 
 > :bulb: If you are using our algorithm in your research, please cite our recent paper: __Upcoming__ 
 
-> :e-mail: Contact: wend.yam.donald.davy.ouedraogo@usherbrooke.ca
+> :e-mail: `Contact: wend.yam.donald.davy.ouedraogo@usherbrooke.ca`
 
 
 <!-- TABLE OF CONTENTS -->
@@ -50,7 +50,7 @@
 <!-- OVERVIEW -->
 <h3 id="overview"> :cloud: Overview</h3>
 
-*A graph-based method to infer isoorthology & recent paralogy relations in a set of homologous transcripts:dna:*
+`A graph-based method to infer isoorthology & recent paralogy relations in a set of homologous transcripts:dna:`
 
 ---
 
@@ -100,7 +100,7 @@ optional arguments:
   -outf OUTPUTFOLDER, --outputfolder OUTPUTFOLDER
                         the output folder to store the results</code></pre>
 
->> Details
+`Details`
 
 <table>
 <tr>
@@ -131,7 +131,7 @@ optional arguments:
   <tr>
     <td>-tsm </br>--tsmvalue</td>
     <td>The similarity mesure(mean, length, unitary)</td>
-    <td>integer 1 | 2 | 3 | 4 | 5 | 6</td>
+    <td>integer 1(tsm+unitary) | 2(tsm+length) | 3(tsm+mean) | 4(tsm++unitary) | 5(tsm++length) | 6(tsm++mean)</td>
   </tr>
   <tr>
     <td>-outf </br> --outputfolder</td>
@@ -143,6 +143,8 @@ optional arguments:
 > Usage example
 
 <pre><code>python3 ./scripts/transcriptOrthology.py -talg ./execution/inputs/transcripts_alignments/ENSGT00390000000104.alg -gtot ./execution/inputs/mapping_gene_to_transcripts/ENSGT00390000000104.fasta -nhxt ./execution/inputs/NHX_trees/ENSGT00390000000104.nwk -lowb 0.7 -outf ./execution/outputs/ -tsm 1</code></pre>
+OR
+<pre><code>sh ./execution.sh</code></pre>
 
 > Output expected
 
@@ -172,7 +174,7 @@ optional arguments:
 __Inputs files__
 <ul>
     <li>:one:
-    <em>tsmcomputing()</em> :arrow_right: returns the similarity matrix (tsm+ | tsm) scores for all pairs of homologous transcripts.
+    <em>tsmcomputing()</em> :arrow_right: returns the similarity matrix (tsm+ | tsm) scores depending on the `tsmvalue` for all pairs of homologous transcripts.
     <pre><code>usage: tsmComputing.py [-h] [-talg TRALIGNMENT]
                        [-gtot GENETOTRANSCRIPTS] [-tsm TSMVALUE]
                        [-outf OUTPUTFOLDER]
@@ -223,7 +225,7 @@ __Outputs files__
 
 <h3 id="project-files-description-data"> :heavy_check_mark: Dataset </h3>
 
-***The folder data contains dataset used for the studies and also the results obtained.***
+``The folder data contains dataset used for the studies and also the results obtained.``
 
 <br>
 ---
