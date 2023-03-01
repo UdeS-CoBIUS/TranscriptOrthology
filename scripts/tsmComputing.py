@@ -1,7 +1,7 @@
 """ :dna: returns the similarity matrix tsm+ or tsm scores for all pairs of homologous transcripts.
 > Usage:
 ======
-    python3 tsm-computing.py [-talg] [-galg] [-gtot] [-tsm] [-outf]
+    python3 tsm-computing.py [-talg] [-gtot] [-tsm]
 
 > Reference:
 ======
@@ -11,7 +11,7 @@ __authors__ = ("Wend Yam Donald Davy Ouedraogo")
 __contact__ = ("wend.yam.donald.davy.usherbrooke.ca")
 __copyright__ = "CoBIUS lab at Université de Sherbrooke, QC, CANADA"
 __date__ = "2022-12-19"
-__version__= "1.0.0"
+__version__= "1.0.2"
 
 import pandas as pd
 import argparse
@@ -21,9 +21,8 @@ def build_arg_parser():
     '''Parsing function'''
     parser = argparse.ArgumentParser(description="parsor program parameter")
     parser.add_argument('-talg', '--tralignment', default=None)
-    parser.add_argument('-galg', '--genesalignment', default=None)
     parser.add_argument('-gtot', '--genetotranscripts', default=None)
-    parser.add_argument('-tsm', '--tsmuncorrected', default=False)
+    parser.add_argument('-tsm', '--tsmvalue', default=False)
     parser.add_argument('-outf', '--outputfolder', default='.')
     return parser
 
@@ -31,33 +30,31 @@ def saving_files(file, outputfolder, name, ind):
     file.to_csv('{}/{}.csv'.format(outputfolder,name), header=True, index=ind, sep=';')
     return True
 
-def get_matrix(transcripts_msa_path, genes_msa_path, gtot_path, tsm_condition, output_folder_path):
+def get_matrix(transcripts_msa_path, gtot_path, tsm_condition, output_folder_path):
     '''Returns the matrix score'''
     try:
         print('\n\n++++++++++++++++Starting ....')
         start = time.time()
-        df_transcripts, df_genes, df_gtot, df_blocks_transcripts, df_blocks_genes = convert_files_to_dataframes(transcripts_msa_path, genes_msa_path, gtot_path, output_folder_path)
+        df_transcripts, df_gtot, df_blocks_transcripts, df_blocks_genes = convert_files_to_dataframes(transcripts_msa_path, gtot_path, output_folder_path)
         print('+++++++ All data were retrieved & the representation of subtranscribed sequences of genes into blocks are available.')
     except:
         raise('Something wrong with the inputs! Please check it out or contact us. Thank you.')
     
     try:
         print('+++++ Computing matrix ...\t in progress')
-        tsm_matrix = compute_matrix(df_transcripts, df_genes, df_gtot, df_blocks_transcripts, df_blocks_genes, tsm_condition)
+        tsm_matrix = compute_matrix(df_transcripts, df_gtot, df_blocks_transcripts, df_blocks_genes, tsm_condition)
         #saving matrix
         saving_files(tsm_matrix, output_folder_path, 'matrix', True)
         end = time.time()
         print('+++++ Computing matrix ...\t status: Finished without errors in {} seconds'.format(str(end-start)))
     except:
         raise('The algorithm exits with errors!! Please contact us for help. Thank you.')
-    
-    return tsm_matrix
+    return tsm_matrix, df_blocks_transcripts, df_blocks_genes
 
-def convert_files_to_dataframes(transcripts_msa_path,genes_msa_path,gtot_path, output_folder_path):
+def convert_files_to_dataframes(transcripts_msa_path,gtot_path, output_folder_path):
     """Format inputs of users into Pandas DataFrames"""
 
     df_transcripts = pd.DataFrame(columns=['id_transcript','alg'])
-    df_genes = pd.DataFrame(columns=['id_gene','alg'])
     df_gtot = pd.DataFrame(columns=['id_transcript','id_gene'])
 
     file_transcripts_msa = open(transcripts_msa_path, 'r')
@@ -66,14 +63,7 @@ def convert_files_to_dataframes(transcripts_msa_path,genes_msa_path,gtot_path, o
     for i_number, row in enumerate(transcripts_msa_rows):
         if row.startswith('>'):
             df_transcripts.loc[row] = [row.split('>')[-1], transcripts_msa_rows[i_number+1]]
-    
-    file_genes_msa = open(genes_msa_path, 'r')
-    genes_msa_rows = [str(_).split('\n')[0] for _ in file_genes_msa.readlines()]
-    file_genes_msa.close()
-    for g_number, row_g in enumerate(genes_msa_rows):
-        if row_g.startswith('>'):
-            df_genes.loc[row_g] = [row_g.split('>')[-1], genes_msa_rows[g_number+1]]
-    
+        
     file_gtot = open(gtot_path, 'r')
     gtot_rows = [str(_).split('\n')[0] for _ in file_gtot.readlines()]
     file_gtot.close()
@@ -85,12 +75,12 @@ def convert_files_to_dataframes(transcripts_msa_path,genes_msa_path,gtot_path, o
     df_blocks_transcripts = retrieve_blocks(transcripts_msa_path)
 
     df_blocks_genes = inferred_genes_blocks(df_blocks_transcripts, df_gtot)
-
+    
     # save files
     saving_files(df_blocks_transcripts, output_folder_path, 'blocks_transcripts', False)
     saving_files(df_blocks_genes, output_folder_path, 'blocks_genes', False)
-    
-    return df_transcripts, df_genes, df_gtot, df_blocks_transcripts, df_blocks_genes
+
+    return df_transcripts, df_gtot, df_blocks_transcripts, df_blocks_genes
 
 def retrieve_blocks(transcripts_msa_path):
     """Retrieve blocks from transcripts and genes MSA"""
@@ -198,7 +188,8 @@ def inferred_genes_blocks(transcripts_blocks, df_gtot):
         else:
             union_set_blocks = set_of_nblocks[0]
         list_union_set_blocks = list(union_set_blocks)
-        gene_blocks = '|'.join(list_union_set_blocks)
+        list_union_set_blocks_sorted = [str(_) for _ in sorted([int(_) for _ in list_union_set_blocks])]
+        gene_blocks = '|'.join(list_union_set_blocks_sorted)
 
         all_genes_blocks.append(gene_blocks)
         all_genes_id.append(gene)
@@ -206,7 +197,7 @@ def inferred_genes_blocks(transcripts_blocks, df_gtot):
     df = pd.DataFrame(data={'id_gene': all_genes_id, 'blocks': all_genes_blocks})
     return df
 
-def compute_matrix(df_transcripts, df_genes, df_gtot, df_blocks_transcripts, df_blocks_genes, tsm_condition):
+def compute_matrix(df_transcripts, df_gtot, df_blocks_transcripts, df_blocks_genes, tsm_condition):
     """ 
         ### Compute the tsm+ | tsm  score
         #### inputs :
@@ -221,7 +212,28 @@ def compute_matrix(df_transcripts, df_genes, df_gtot, df_blocks_transcripts, df_
     """
     transcripts = list(df_transcripts['id_transcript'].values)
     matrix = []
-    if tsm_condition:
+    tsm_condition = int(tsm_condition)
+
+    if tsm_condition == 1:
+        """ tsm+unitary"""
+        for transcript_1 in transcripts:
+            row = []
+            for transcript_2 in transcripts:
+                # Compute the nucHOM score (unitary)
+                score_nuc_hom = round(compute_nuchom_score(transcript_1, transcript_2, df_transcripts),3)
+                row.append(score_nuc_hom)
+            matrix.append(row)
+    elif tsm_condition == 2:
+        """ tsm+length"""
+        for transcript_1 in transcripts:
+            row = []
+            for transcript_2 in transcripts:
+                # Compute the DegHOM score (length)
+                score_deg_hom = round(compute_deghom_score(transcript_1, transcript_2, df_blocks_transcripts),3)
+                row.append(score_deg_hom)
+            matrix.append(row)
+    elif tsm_condition == 3:
+        """ tsm+mean"""
         for transcript_1 in transcripts:
             row = []
             for transcript_2 in transcripts:
@@ -233,17 +245,40 @@ def compute_matrix(df_transcripts, df_genes, df_gtot, df_blocks_transcripts, df_
                 score = round(((score_nuc_hom+score_deg_hom)/2),3)
                 row.append(score)
             matrix.append(row)
-    else:
+    elif tsm_condition == 4:
+        """ tsm++unitary"""
         for transcript_1 in transcripts:
             row = []
             for transcript_2 in transcripts:
                 gene_tr_1 = df_gtot[df_gtot['id_transcript'] == transcript_1].id_gene.values[0]
                 gene_tr_2 = df_gtot[df_gtot['id_transcript'] == transcript_2].id_gene.values[0]
-                score_nuc_hom_v2 = round(compute_nuchom_score_tsmplus(transcript_1, transcript_2, df_transcripts, df_genes, gene_tr_1, gene_tr_2),3)
+                score_nuc_hom_v2 = round(compute_nuchom_score_tsmplus(transcript_1, transcript_2, df_transcripts, gene_tr_1, gene_tr_2, df_gtot),3)
+                row.append(score_nuc_hom_v2)
+            matrix.append(row)
+    elif tsm_condition == 5:
+        """ tsm++length"""
+        for transcript_1 in transcripts:
+            row = []
+            for transcript_2 in transcripts:
+                gene_tr_1 = df_gtot[df_gtot['id_transcript'] == transcript_1].id_gene.values[0]
+                gene_tr_2 = df_gtot[df_gtot['id_transcript'] == transcript_2].id_gene.values[0]
+                score_deg_hom_v2 = round(compute_deghom_score_tsmplus(transcript_1, transcript_2, df_blocks_transcripts, df_blocks_genes, gene_tr_1, gene_tr_2),3)
+                row.append(score_deg_hom_v2)
+            matrix.append(row)
+    elif tsm_condition == 6:
+        """ tsm++mean"""
+        for transcript_1 in transcripts:
+            row = []
+            for transcript_2 in transcripts:
+                gene_tr_1 = df_gtot[df_gtot['id_transcript'] == transcript_1].id_gene.values[0]
+                gene_tr_2 = df_gtot[df_gtot['id_transcript'] == transcript_2].id_gene.values[0]
+                score_nuc_hom_v2 = round(compute_nuchom_score_tsmplus(transcript_1, transcript_2, df_transcripts, gene_tr_1, gene_tr_2, df_gtot),3)
                 score_deg_hom_v2 = round(compute_deghom_score_tsmplus(transcript_1, transcript_2, df_blocks_transcripts, df_blocks_genes, gene_tr_1, gene_tr_2),3)
                 score_tsmplus = round(((score_nuc_hom_v2+score_deg_hom_v2)/2),3)
                 row.append(score_tsmplus)
             matrix.append(row)
+    else:
+        raise Exception('Error! the value of tsm parameter does not match!')
     df_matrix = pd.DataFrame(matrix, index=transcripts, columns=transcripts)
     return df_matrix
 
@@ -264,15 +299,33 @@ def compute_deghom_score_tsmplus(tr_id, tr_ref, transcripts_blocks,data_block_al
     score = len(intersect_set)/len(denum_list)   
     return score
 
-def compute_nuchom_score_tsmplus(transcript_1, transcript_2, data_alg_seq, data_alg_gene_seq, gene_tr_1, gene_tr_2):
+def nucleotide_in_gene(gene_tr1, position, data_alg_seq, df_gtot):
+    transcripts_in_gene1 = list(pd.Categorical(df_gtot[df_gtot['id_gene']==gene_tr1].id_transcript.values))
+    #transcripts_in_gene2 = list(pd.Categorical(df_gtot[df_gtot['id_gene']==gene_tr2].id_transcript.values))
+    bool_nuc1 = False
+    #bool_nuc2 = False
+    for transcript1 in transcripts_in_gene1:
+        nuc1 = data_alg_seq[data_alg_seq['id_transcript']==transcript1].alg.values[0][position]
+        if nuc1 != '-':
+            bool_nuc1 = True
+            break
+    '''for transcript2 in transcripts_in_gene2:
+        nuc2 = data_alg_seq[data_alg_seq['id_transcript']==transcript2].alg.values[0][position]
+        if nuc2 != '-':
+            bool_nuc2 = True
+            break'''
+    
+    return bool_nuc1
+
+def compute_nuchom_score_tsmplus(transcript_1, transcript_2, data_alg_seq, gene_tr_1, gene_tr_2, df_gtot):
     """
-        Compute nucHom score (do not account for blocks not appearing at the gene level)
+        Compute nucHom score (do not account for nucleotides not appearing at the gene level)
     """
     alignment_tr1 = data_alg_seq[data_alg_seq['id_transcript']==transcript_1].alg.values[0]
     alignment_tr2 = data_alg_seq[data_alg_seq['id_transcript']==transcript_2].alg.values[0]
 
-    alignment_g1 = data_alg_gene_seq[data_alg_gene_seq['id_gene']==gene_tr_1].alg.values[0]
-    alignment_g2 = data_alg_gene_seq[data_alg_gene_seq['id_gene']==gene_tr_2].alg.values[0]
+    #alignment_g1 = data_alg_gene_seq[data_alg_gene_seq['id_gene']==gene_tr_1].alg.values[0]
+    #alignment_g2 = data_alg_gene_seq[data_alg_gene_seq['id_gene']==gene_tr_2].alg.values[0]
    
     length_alignment_tr1 = len(alignment_tr1)
     length_alignment_tr2 = len(alignment_tr2)
@@ -290,14 +343,26 @@ def compute_nuchom_score_tsmplus(transcript_1, transcript_2, data_alg_seq, data_
                 matchs_mismatchs += 1
             elif(((nucleotide_tr1 == '-') and (nucleotide_tr2 != '-'))) or ((nucleotide_tr1 != '-') and (nucleotide_tr2 == '-')):
                 indel += 1
-                nuc_g1 = alignment_g1[position]
-                nuc_g2 = alignment_g2[position]
-                if nuc_g1 != '-' and nuc_g2 != '-':
+                #nuc_g1 = alignment_g1[position]
+                #nuc_g2 = alignment_g2[position]
+                #nuc_g1, nuc_g2 = nucleotide_in_gene(gene_tr_1, gene_tr_2, position, data_alg_seq, df_gtot)
+                if (nucleotide_tr1 != '-') and (nucleotide_tr2 == '-'):
+                    nuc_g2 = nucleotide_in_gene(gene_tr_2, position, data_alg_seq, df_gtot)
+                    nuc_g1 = True
+                else:
+                    nuc_g1 = nucleotide_in_gene(gene_tr_1, position, data_alg_seq, df_gtot)
+                    nuc_g2 = True
+                    
+                if nuc_g1 and nuc_g2:
                     indel_denum += 1
             else:
                 gap_gap += 1
-        score = (matchs_mismatchs) / (matchs_mismatchs + indel_denum)
-    return score
+        if (matchs_mismatchs + indel_denum) == 0:
+            score = 0
+            return score
+        else:
+            score = score = (matchs_mismatchs) / (matchs_mismatchs + indel_denum)
+            return score
 
 def compute_deghom_score(tr_id, tr_ref, transcripts_blocks):
     """
@@ -348,10 +413,9 @@ if __name__ == '__main__':
     # retrieve inputs given by user
     args = build_arg_parser().parse_args()
     transcripts_msa_path = args.tralignment
-    genes_msa_path = args.genesalignment
     gtot_path = args.genetotranscripts
-    tsm_conditions_path = args.tsmuncorrected
+    tsm_conditions_path = int(args.tsmuncorrected)
     output_folder_path = args.outputfolder
 
     # compute the algorithm
-    get_matrix(transcripts_msa_path, genes_msa_path, gtot_path, tsm_conditions_path, output_folder_path)
+    get_matrix(transcripts_msa_path, gtot_path, tsm_conditions_path, output_folder_path)

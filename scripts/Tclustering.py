@@ -11,15 +11,14 @@ __authors__ = ("Wend Yam Donald Davy Ouedraogo")
 __contact__ = ("wend.yam.donald.davy.usherbrooke.ca")
 __copyright__ = "CoBIUS lab at Université de Sherbrooke, QC, CANADA"
 __date__ = "2022-12-19"
-__version__= "1.0.0"
+__version__= "1.0.2"
 
 import pandas as pd
 import networkx as nx
-import matplotlib.pyplot as plt
-import argparse
-import warnings
 import time
 from ete3 import Tree
+import matplotlib.pyplot as plt
+import argparse
 
 def build_arg_parser():
     '''Parsing function'''
@@ -31,9 +30,9 @@ def build_arg_parser():
     parser.add_argument('-outf', '--outputfolder', default='.')
     return parser
 
-def get_orthology_graph(matrix_path, gtot_path, gt_path, lower_bound, output_folder_path):
+def get_orthology_graph(matrix, gtot_path, gt_path, lower_bound, output_folder):
     df_gtot = convert_inputs_data(gtot_path)
-    matrix = pd.read_csv(matrix_path, sep=';', index_col=0)
+    # matrix = pd.read_csv(matrix_path, sep=';', index_col=0)
     try:
         start1 = time.time()
         print('+++++ Searching for recent-paralogs ... \tstatus: processing')
@@ -55,7 +54,7 @@ def get_orthology_graph(matrix_path, gtot_path, gt_path, lower_bound, output_fol
     try:
         start3 = time.time()
         print('+++++ Construction of the orthology graph (Adding nodes ...) ... \tstatus: processing')
-        clusters = get_conserved_clusters(graphG, recent_paralogs, df_gtot, output_folder_path)
+        clusters = get_conserved_clusters(graphG, recent_paralogs, df_gtot, output_folder)
         end3 = time.time()
         print('+++++ Construction of the orthology graph (Adding nodes ...) ... \tstatus: finished in {} seconds'.format(str(end3-start3)))
     except:
@@ -64,14 +63,13 @@ def get_orthology_graph(matrix_path, gtot_path, gt_path, lower_bound, output_fol
     try:
         start4 = time.time()
         print('+++++ Searching for connected components ... \tstatus: processing')
-        write_results(clusters, df_gtot, matrix, gt_path, output_folder_path)
+        df, df_orthology = write_results(clusters, df_gtot, matrix, gt_path, output_folder)
         end4 = time.time()
-        print('+++++ Searching for connected components ... \tstatus: finished in {} seconds'.format(str(end3-start3)))
+        print('+++++ Searching for connected components ... \tstatus: finished in {} seconds'.format(str(end4-start4)))
 
     except:
         raise('Failed to save results ! Errors occured.')
-
-    return clusters, graphG
+    return clusters, df, df_orthology
 
 def convert_inputs_data(gtot_path):
     df_gtot = pd.DataFrame(columns=['id_transcript','id_gene'])
@@ -132,10 +130,14 @@ def search_recent_paralogs(matrix, g):
 
 def rhb_clustering(matrix, g, inparalogs, lower_bound):
     """Returns a similarity graph G containing recent paralogs and the recent paralogs details"""
-
+    
     #warning if lower_bound is greater than 1
-    if lower_bound > 1:
-        warnings.warn('Each transcript is considered as a cluster. Check the lower bound! Enter a lower bound less greater than 1')
+    if lower_bound > 1 or lower_bound < 0:
+        raise Exception('Each transcript is considered as a cluster. Check the lower bound! Enter a lower bound less greater than 1')
+    elif lower_bound < 0:
+        raise Exception('A negative value has been entered. Check the lower bound! Enter a valid lower bound')
+    else:
+        pass
 
     #initialize the graph G
     edges_rbhs = []
@@ -180,20 +182,23 @@ def rhb_clustering(matrix, g, inparalogs, lower_bound):
     df_edges_rbhs = pd.DataFrame(data={'pair_id': pair_id, 'pair_ref': pair_ref, 'score': score_pair})
     return G, df_edges_rbhs
 
-def get_conserved_clusters(graphData, inParalogs, g, output):
+def get_conserved_clusters(graphData, inParalogs, g, output_folder):
     """Returns the conserved clusters -- inference of transcripts homologies"""
+    
     is_saving = False
     if(len(list(g.id_transcript.values))) <= 20:
        is_saving = True
-
+    
     #Retrieve data
     G = graphData[0]
     edges_data = graphData[1]
-
+    
+    # save figures if number of transcripts is lower than 20
     if is_saving:
         nx.draw(G, with_labels=True)
-        plt.savefig('{}/start_orthology_graph.pdf'.format(output))
+        plt.savefig('{}/start_orthology_graph.pdf'.format(output_folder))
         #plt.show(G)
+
 
     edges_data = edges_data.sort_values(by=['score'], ascending=False)
 
@@ -243,16 +248,15 @@ def get_conserved_clusters(graphData, inParalogs, g, output):
                 if len(inter_set) == len(set_id) and len(inter_set) == len(set_ref):
                 #if len(inter_set) == max(len(set_id), len(set_ref)):
                     G.add_edge(transcript_id, transcript_ref)
-
     if is_saving:
         plt.clf()
         nx.draw(G, with_labels=True)
         #plt.show(G)
-        plt.savefig('{}/end_orthology_graph.pdf'.format(output))
+        plt.savefig('{}/end_orthology_graph.pdf'.format(output_folder))
     clusters_components = [list(G.subgraph(c).copy()) for c in nx.connected_components(G)]
     return clusters_components
 
-def write_results(clusters, df_gtot, matrix, gt_path, path_output):
+def write_results(clusters, df_gtot, matrix, gt_path, output_folder):
     '''Write the results'''
 
     transcripts = list(df_gtot['id_transcript'].values)
@@ -290,10 +294,9 @@ def write_results(clusters, df_gtot, matrix, gt_path, path_output):
 
   
     df = pd.DataFrame(data={'id_transcript':id_transcripts, 'isoorthologs|recent-paralogs': conserved_transcripts, 'tsm_scores': tsm_scores })
-    df.to_csv('{}/groupsOfOrthologs.csv'.format(path_output), sep=';', header=True)
-    df_orthology.to_csv('{}/relationsOrthology.csv'.format(path_output), sep=';', header=True)
-    return True
-
+    df.to_csv('{}/groupsOfOrthologs.csv'.format(output_folder), sep=';', header=True)
+    df_orthology.to_csv('{}/relationsOrthology.csv'.format(output_folder), sep=';', header=True)
+    return df, df_orthology
 
 if __name__ == '__main__':
     # retrieve inputs given by user
@@ -306,4 +309,3 @@ if __name__ == '__main__':
 
     #compute the algorithm
     get_orthology_graph(matrix_path, gtot_path, gt_path, lower_bound, output_folder_path)
-    

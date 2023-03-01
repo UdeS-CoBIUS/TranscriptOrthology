@@ -1,7 +1,7 @@
 
 # :dna: Inferring clusters of orthologous and paralogous transcripts
 
-***``Algorithm to infer clusters of isoorthologous transcripts using gene-level homology relationships and a Reciprocal Best Hits approach``***
+***Algorithm to infer clusters of isoorthologous transcripts using gene-level homology relationships and a Reciprocal Best Hits approach***
 
 
 <p align="center">
@@ -9,7 +9,7 @@
 </p>
 
 :busts_in_silhouette: __Authors__
-`Wend Yam Donald Davy Ouedraogo & Aida Ouangraoua`, CoBIUS LAB, Department of Computer Science, Faculty of Science, Université de Sherbrooke, Sherbrooke, Canada
+* `Wend Yam Donald Davy Ouedraogo & Aida Ouangraoua`, CoBIUS LAB, Department of Computer Science, Faculty of Science, Université de Sherbrooke, Sherbrooke, Canada*
 
 > :bulb: If you are using our algorithm in your research, please cite our recent paper: __Upcoming__ 
 
@@ -58,7 +58,7 @@
 <!-- Requirements -->
 <h3 id="requirements"> :hammer_and_pick: Requirements</h3>
 
-*   __`python3 (at least python 3.6)`__
+*   __`python3 (at leat python 3.6)`__
 *   __`NetworkX`__
 *   __`Pandas`__
 *   __`Numpy`__
@@ -76,22 +76,29 @@
 
 > Command
 
-<pre><code>usage: transcriptOrthology.py [-h] [-talg TRALIGNMENT] [-galg GENESALIGNMENT]
+<pre><code>usage: transcriptOrthology.py [-h] [-talg TRALIGNMENT]
                               [-gtot GENETOTRANSCRIPTS] [-nhxt NHXGENETREE]
-                              [-lowb LOWERBOUND] [-tsm TSMUNCORRECTED]
+                              [-lowb LOWERBOUND] [-tsm TSMVALUE]
                               [-outf OUTPUTFOLDER]
 
-parsor program parameter
+program parameters
 
 optional arguments:
   -h, --help            show this help message and exit
   -talg TRALIGNMENT, --tralignment TRALIGNMENT
-  -galg GENESALIGNMENT, --genesalignment GENESALIGNMENT
+                        Multiple Sequences Alignment of transcripts in FASTA
+                        format
   -gtot GENETOTRANSCRIPTS, --genetotranscripts GENETOTRANSCRIPTS
+                        mappings transcripts to corresponding genes
   -nhxt NHXGENETREE, --nhxgenetree NHXGENETREE
+                        NHX gene tree
   -lowb LOWERBOUND, --lowerbound LOWERBOUND
-  -tsm TSMUNCORRECTED, --tsmuncorrected TSMUNCORRECTED
-  -outf OUTPUTFOLDER, --outputfolder OUTPUTFOLDER</code></pre>
+                        a lower bound for the selection of transcripts RBHs
+  -tsm TSMVALUE, --tsmvalue TSMVALUE
+                        an integer(1|2|3|4|5|6) that refers to the transcript
+                        similarity measure
+  -outf OUTPUTFOLDER, --outputfolder OUTPUTFOLDER
+                        the output folder to store the results</code></pre>
 
 >> Details
 
@@ -104,17 +111,12 @@ optional arguments:
   <tr>
     <td>-talg</br>--tralignment</td>
     <td>MSA of transcripts</td>
-    <td>FASTA format </br>>{id_transcript}\n{sequence}</td>
-  </tr>
-  <tr>
-    <td>-galg</br>--genesalignment</td>
-    <td>MSA of genes</td>
-    <td>FASTA format</br>>{id_gene}\n{sequence}</td>
+    <td>FASTA format </br> >{id_transcript}\n{sequence}</td>
   </tr>
   <tr>
     <td>-gtot </br>--genetotranscripts</td>
     <td>mappings g(t)</td>
-    <td>FASTA format</br>>{id_transcript}:{id_gene}\n</td>
+    <td>FASTA format </br> >{id_transcript}:{id_gene}\n</td>
   </tr>
   <tr>
     <td>-nhxt</br> --nhxtgenetree</td>
@@ -127,6 +129,11 @@ optional arguments:
     <td>float between 0 and 1</td>
   </tr>
   <tr>
+    <td>-tsm </br>--tsmvalue</td>
+    <td>The similarity mesure(mean, length, unitary)</td>
+    <td>integer 1 | 2 | 3 | 4 | 5 | 6</td>
+  </tr>
+  <tr>
     <td>-outf </br> --outputfolder</td>
     <td>folder to save results. The current program folder is set by default.</td>
     <td>String</td>
@@ -135,25 +142,23 @@ optional arguments:
 
 > Usage example
 
-<pre><code>python3 ./scripts/transcriptOrthology.py -talg ./execution/inputs/transcripts_alignments/ENSGT00390000000104.alg -galg ./execution/inputs/genes_alignments/ENSGT00390000000104.alg -gtot ./execution/inputs/mapping_gene_to_transcripts/ENSGT00390000000104.fasta -nhxt ./execution/inputs/NHX_trees/ENSGT00390000000104.nwk -lowb 0.7 -outf ./execution/outputs/</code></pre>
+<pre><code>python3 ./scripts/transcriptOrthology.py -talg ./execution/inputs/transcripts_alignments/ENSGT00390000000104.alg -gtot ./execution/inputs/mapping_gene_to_transcripts/ENSGT00390000000104.fasta -nhxt ./execution/inputs/NHX_trees/ENSGT00390000000104.nwk -lowb 0.7 -outf ./execution/outputs/ -tsm 1</code></pre>
 
 > Output expected
 
 <pre><code>++++++++++++++++Starting ....
 +++++++ All data were retrieved & the representation of subtranscribed sequences of genes into blocks are available.
 +++++ Computing matrix ...       in progress
-+++++ Computing matrix ...       status: Finished without errors in 0.8071668148040771 seconds
++++++ Computing matrix ...       status: Finished without errors in 0.42296433448791504 seconds
 +++++ Searching for recent-paralogs ...         status: processing
-+++++ Searching for recent-paralogs ...         status: finished in 0.11053657531738281 seconds
++++++ Searching for recent-paralogs ...         status: finished in 0.11350250244140625 seconds
 +++++ Searching for RBHs ...    status: processing
-+++++ Searching for RBHs ...    status: finished in 0.10251045227050781 seconds
++++++ Searching for RBHs ...    status: finished in 0.09129834175109863 seconds
 +++++ Construction of the orthology graph (Adding nodes ...) ...        status: processing
-+++++ Construction of the orthology graph (Adding nodes ...) ...        status: finished in 0.4378941059112549 seconds
++++++ Construction of the orthology graph (Adding nodes ...) ...        status: finished in 0.524106502532959 seconds
 +++++ Searching for connected components ...    status: processing
-+++++ Searching for connected components ...    status: finished in 0.4378941059112549 seconds
++++++ Searching for connected components ...    status: finished in 0.06076645851135254 seconds
 ++++++++++++++++Finished 
-
- Successful. Data results can be found in ./execution/outputs/
 </code></pre>
 
 
@@ -168,8 +173,8 @@ __Inputs files__
 <ul>
     <li>:one:
     <em>tsmcomputing()</em> :arrow_right: returns the similarity matrix (tsm+ | tsm) scores for all pairs of homologous transcripts.
-    <pre><code>usage: tsmComputing.py [-h] [-talg TRALIGNMENT] [-galg GENESALIGNMENT]
-                       [-gtot GENETOTRANSCRIPTS] [-tsm TSMUNCORRECTED]
+    <pre><code>usage: tsmComputing.py [-h] [-talg TRALIGNMENT]
+                       [-gtot GENETOTRANSCRIPTS] [-tsm TSMVALUE]
                        [-outf OUTPUTFOLDER]
 
 parsor program parameter
@@ -177,9 +182,8 @@ parsor program parameter
 optional arguments:
   -h, --help            show this help message and exit
   -talg TRALIGNMENT, --tralignment TRALIGNMENT
-  -galg GENESALIGNMENT, --genesalignment GENESALIGNMENT
   -gtot GENETOTRANSCRIPTS, --genetotranscripts GENETOTRANSCRIPTS
-  -tsm TSMUNCORRECTED, --tsmuncorrected TSMUNCORRECTED
+  -tsm TSMVALUE, --tsmvalue TSMVALUE
   -outf OUTPUTFOLDER, --outputfolder OUTPUTFOLDER</code></pre>
   </li>
     <li>:two:
@@ -211,8 +215,8 @@ optional arguments:
 __Outputs files__
 
 <ul>
-    <li>:one: <b>matrix.csv</b> : similarity matrix score that shows the tsm+ score between each pair of homologous transcripts.</li>
-    <li>:two: <b>blocks_transcripts.csv|blocks_genes.csv</b> : csv file describing the representation of blocks for each transcript(resp. gene).</li>
+    <li>:one: <b>matrix.csv</b> : similarity matrix score that present the tsm+ score between each pair of homologous transcripts.</li>
+    <li>:two: <b>blocks_transcripts.csv|blocks_genes</b> : csv file describing the representation of blocks for each transcript(resp. gene).</li>
     <li>:three: <b>start_orthology_graph.pdf|end_orthology_graph.pdf</b> : orthology graph at the start of the algorithm(resp. at the end of the algorithm) showing only the pair relationships between recent-paralogs(resp. all the orthologous clusters). (:warning:only retrieved if the number of transcripts is not greater than 20)</li>
     <li>:four: <b>groupsOfOrthoogs.csv|relationsOrthology.csv</b> : csv files resuming the information of the isoorthology-clustering.</li>
 </ul>
