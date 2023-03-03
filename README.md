@@ -28,6 +28,9 @@
     <ol>
     <a href="#requirements"> ➤ Requirements</a>
     </ol>
+    <ol>
+    <a href="#package"> ➤ Package Pypi</a>
+    </ol>
     </li>
     <li><a href="#getting-started"> ➤ Getting Started</a>
     <ol><a href="#main"> ➤ Main command/Execution</a></ol></li>
@@ -63,6 +66,28 @@
 *   __`Pandas`__
 *   __`Numpy`__
 *   __`ETE toolkit`__
+
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+<!-- Package -->
+<h3 id="package"> :package: About the package</h3>
+
+``install the package``
+<pre><code>pip3 install transcriptorthology</code></pre>
+
+``import package and use the main function``
+<pre><code>from transcriptorthology.transcriptOrthology import inferring_transcripts_isoortholoy
+
+if __name__ == '__main__':
+  gtot_path = './execution/mapping_gene_to_transcripts/ENSGT00390000000080.fasta'
+  gt_path = './execution/NHX_trees/ENSGT00390000000080.nwk'
+  lower_bound = 0.7
+  transcripts_msa_path = './execution/transcripts_alignments/ENSGT00390000000080.alg'
+  tsm_conditions = 2
+  output_folder = './execution/output_folder'
+  
+  <span style="color:red;">inferring_transcripts_isoortholoy</span>(<span style="color:red;">transcripts_msa_path</span>, <span style="color:green;">gtot_path</span>, <span style="color:purple;">gt_path</span>,<span style="color:orange;">tsm_conditions</span>,<span style="color:yellow;">lower_bound</span>,<span style="color:gray;">output_folder</span>)</code></pre>
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
