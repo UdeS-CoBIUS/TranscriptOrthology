@@ -132,6 +132,15 @@ def search_blocks_in_msa(list_of_ids_transcripts, blocks_data):
                 prec_value_block = current_block
     positions_blocks = {}
     number = 0
+    interval_stop_last_block = length_column
+    for nt in range(len(blocks_data[0])-1,0,-1):
+        last_nts = []
+        for alg in blocks_data:
+            last_nts.append(alg[nt])
+        if 1 in last_nts:
+            interval_stop_last_block = nt
+            break
+
     for i in range(len(positions)-1):
         interval_start = positions[i]
         interval_stop = positions[i+1]
@@ -139,7 +148,6 @@ def search_blocks_in_msa(list_of_ids_transcripts, blocks_data):
         positions_blocks[i] = interval
         number = i
     interval_start_last_block = positions[-1]
-    interval_stop_last_block = length_column
     positions_blocks[number+1] = (interval_start_last_block, interval_stop_last_block)
 
     # transcripts
