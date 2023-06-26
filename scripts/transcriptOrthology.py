@@ -11,12 +11,12 @@ __authors__ = ("Wend Yam Donald Davy Ouedraogo")
 __contact__ = ("wend.yam.donald.davy.usherbrooke.ca")
 __copyright__ = "CoBIUS lab at Université de Sherbrooke, QC, CANADA"
 __date__ = "2023-06-26"
-__version__= "2.0.1"
+__version__= "2.0.6"
 
 
 import argparse
-from Tclustering import get_orthology_graph
-from tsmComputing import get_matrix
+from .Tclustering import get_orthology_graph
+from .tsmComputing import get_matrix
 
 
 def build_arg_parser():
