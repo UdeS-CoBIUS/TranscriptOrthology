@@ -77,7 +77,7 @@
 <pre><code>pip3 install transcriptorthology</code></pre>
 
 ``import package and use the main function``
-<pre><code>from transcriptorthology.transcriptOrthology import inferring_transcripts_isoortholoy
+<pre><code>from transcriptorthology.transcriptOrthology import inferring_transcripts_isoorthology
 
 if __name__ == '__main__':
   gtot_path = './execution/mapping_gene_to_transcripts/ENSGT00390000000080.fasta'
@@ -87,7 +87,7 @@ if __name__ == '__main__':
   tsm_conditions = 2
   output_folder = './execution/output_folder'
   
-  <span style="color:red;">inferring_transcripts_isoortholoy</span>(<span style="color:red;">transcripts_msa_path</span>, <span style="color:green;">gtot_path</span>, <span style="color:purple;">gt_path</span>,<span style="color:orange;">tsm_conditions</span>,<span style="color:yellow;">lower_bound</span>,<span style="color:gray;">output_folder</span>)</code></pre>
+  <span style="color:red;">inferring_transcripts_isoorthology</span>(<span style="color:red;">transcripts_msa_path</span>, <span style="color:green;">gtot_path</span>, <span style="color:purple;">gt_path</span>,<span style="color:orange;">tsm_conditions</span>,<span style="color:yellow;">lower_bound</span>,<span style="color:gray;">output_folder</span>)</code></pre>
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
