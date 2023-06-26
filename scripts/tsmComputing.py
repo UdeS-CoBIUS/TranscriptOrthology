@@ -16,6 +16,7 @@ __version__= "1.0.2"
 import pandas as pd
 import argparse
 import time
+import numpy as np
 
 def build_arg_parser():
     '''Parsing function'''
@@ -219,76 +220,152 @@ def compute_matrix(df_transcripts, df_gtot, df_blocks_transcripts, df_blocks_gen
         Returns the matrix similarity score
     """
     transcripts = list(df_transcripts['id_transcript'].values)
-    matrix = []
+    matrix = np.zeros((len(transcripts), len(transcripts)))
     tsm_condition = int(tsm_condition)
+    used_indice = {}
 
     if tsm_condition == 1:
         """ tsm+unitary"""
-        for transcript_1 in transcripts:
-            row = []
-            for transcript_2 in transcripts:
-                # Compute the nucHOM score (unitary)
-                score_nuc_hom = round(compute_nuchom_score(transcript_1, transcript_2, df_transcripts),3)
-                row.append(score_nuc_hom)
-            matrix.append(row)
+        for i, transcript_1 in enumerate(transcripts):
+            for j, transcript_2 in enumerate(transcripts):
+                if transcript_1 == transcript_2:
+                    matrix[i,j] = 1.0
+                else:
+                    indice1 = transcript_1+'&'+transcript_2
+                    indice2 = transcript_2+'&'+transcript_1
+                    if indice1 not in list(used_indice.keys()) and indice2 not in list(used_indice.keys()):
+                        # Compute the nucHOM score (unitary)
+                        score_nuc_hom = round(compute_nuchom_score(transcript_1, transcript_2, df_transcripts),3)
+                        matrix[i, j] = score_nuc_hom
+                        used_indice[indice1] = score_nuc_hom
+                        used_indice[indice2] = score_nuc_hom
+                    else :
+                        matrix[i, j] = used_indice[indice1]
     elif tsm_condition == 2:
         """ tsm+length"""
-        for transcript_1 in transcripts:
-            row = []
-            for transcript_2 in transcripts:
-                # Compute the DegHOM score (length)
-                score_deg_hom = round(compute_deghom_score(transcript_1, transcript_2, df_blocks_transcripts),3)
-                row.append(score_deg_hom)
-            matrix.append(row)
+        for i, transcript_1 in enumerate(transcripts):
+            for j, transcript_2 in enumerate(transcripts):
+                if transcript_1 == transcript_2:
+                    matrix[i,j] = 1.0
+                else:
+                    indice1 = transcript_1+'&'+transcript_2
+                    indice2 = transcript_2+'&'+transcript_1
+                    if indice1 not in list(used_indice.keys()) and indice2 not in list(used_indice.keys()):
+                        # Compute the nucHOM score (unitary)
+                        score_deg_hom = round(compute_deghom_score(transcript_1, transcript_2, df_blocks_transcripts),3)
+                        matrix[i, j] = score_deg_hom
+                        used_indice[indice1] = score_deg_hom
+                        used_indice[indice2] = score_deg_hom
+                    else :
+                        matrix[i, j] = used_indice[indice1]
     elif tsm_condition == 3:
         """ tsm+mean"""
-        for transcript_1 in transcripts:
-            row = []
-            for transcript_2 in transcripts:
-                # Compute the nucHOM score (unitary)
-                score_nuc_hom = round(compute_nuchom_score(transcript_1, transcript_2, df_transcripts),3)
-                # Compute the DegHOM score (length)
-                score_deg_hom = round(compute_deghom_score(transcript_1, transcript_2, df_blocks_transcripts),3)
-                # Compute tsm (mean)
-                score = round(((score_nuc_hom+score_deg_hom)/2),3)
-                row.append(score)
-            matrix.append(row)
+        for i, transcript_1 in enumerate(transcripts):
+            for j, transcript_2 in enumerate(transcripts):
+                if transcript_1 == transcript_2:
+                    matrix[i,j] = 1.0
+                else:
+                    indice1 = transcript_1+'&'+transcript_2
+                    indice2 = transcript_2+'&'+transcript_1
+                    if indice1 not in list(used_indice.keys()) and indice2 not in list(used_indice.keys()):
+                        # Compute the nucHOM score (unitary)
+                        score_nuc_hom = round(compute_nuchom_score(transcript_1, transcript_2, df_transcripts),3)
+                        # Compute the DegHOM score (length)
+                        score_deg_hom = round(compute_deghom_score(transcript_1, transcript_2, df_blocks_transcripts),3)
+                        # Compute tsm (mean)
+                        score = round(((score_nuc_hom+score_deg_hom)/2),3)
+                        matrix[i, j] = score
+                        used_indice[indice1] = score
+                        used_indice[indice2] = score
+                    else :
+                        matrix[i, j] = used_indice[indice1]
     elif tsm_condition == 4:
         """ tsm++unitary"""
-        for transcript_1 in transcripts:
-            row = []
-            for transcript_2 in transcripts:
-                gene_tr_1 = df_gtot[df_gtot['id_transcript'] == transcript_1].id_gene.values[0]
-                gene_tr_2 = df_gtot[df_gtot['id_transcript'] == transcript_2].id_gene.values[0]
-                score_nuc_hom_v2 = round(compute_nuchom_score_tsmplus(transcript_1, transcript_2, df_transcripts, gene_tr_1, gene_tr_2, df_gtot),3)
-                row.append(score_nuc_hom_v2)
-            matrix.append(row)
+        gene_model = get_gene_model(df_gtot, df_transcripts)
+        for i, transcript_1 in enumerate(transcripts):
+            for j, transcript_2 in enumerate(transcripts):
+                if transcript_1 == transcript_2:
+                    matrix[i,j] = 1.0
+                else:
+                    indice1 = transcript_1+'&'+transcript_2
+                    indice2 = transcript_2+'&'+transcript_1
+                    if indice1 not in list(used_indice.keys()) and indice2 not in list(used_indice.keys()):
+                        gene_tr_1 = df_gtot[df_gtot['id_transcript'] == transcript_1].id_gene.values[0]
+                        gene_tr_2 = df_gtot[df_gtot['id_transcript'] == transcript_2].id_gene.values[0]
+                        score_nuc_hom_v2 = round(compute_nuchom_score_tsmplus(transcript_1, transcript_2, df_transcripts, gene_tr_1, gene_tr_2, gene_model),3)
+                        matrix[i, j] = score_nuc_hom_v2
+                        used_indice[indice1] = score_nuc_hom_v2
+                        used_indice[indice2] = score_nuc_hom_v2
+                    else :
+                        matrix[i, j] = used_indice[indice1]
     elif tsm_condition == 5:
         """ tsm++length"""
-        for transcript_1 in transcripts:
-            row = []
-            for transcript_2 in transcripts:
-                gene_tr_1 = df_gtot[df_gtot['id_transcript'] == transcript_1].id_gene.values[0]
-                gene_tr_2 = df_gtot[df_gtot['id_transcript'] == transcript_2].id_gene.values[0]
-                score_deg_hom_v2 = round(compute_deghom_score_tsmplus(transcript_1, transcript_2, df_blocks_transcripts, df_blocks_genes, gene_tr_1, gene_tr_2),3)
-                row.append(score_deg_hom_v2)
-            matrix.append(row)
+        for i, transcript_1 in enumerate(transcripts):
+            for j, transcript_2 in enumerate(transcripts):
+                if transcript_1 == transcript_2:
+                    matrix[i,j] = 1.0
+                else:
+                    indice1 = transcript_1+'&'+transcript_2
+                    indice2 = transcript_2+'&'+transcript_1
+                    if indice1 not in list(used_indice.keys()) and indice2 not in list(used_indice.keys()):
+                        gene_tr_1 = df_gtot[df_gtot['id_transcript'] == transcript_1].id_gene.values[0]
+                        gene_tr_2 = df_gtot[df_gtot['id_transcript'] == transcript_2].id_gene.values[0]
+                        score_deg_hom_v2 = round(compute_deghom_score_tsmplus(transcript_1, transcript_2, df_blocks_transcripts, df_blocks_genes, gene_tr_1, gene_tr_2),3)
+                        matrix[i, j] = score_deg_hom_v2
+                        used_indice[indice1] = score_deg_hom_v2
+                        used_indice[indice2] = score_deg_hom_v2
+                    else :
+                        matrix[i, j] = used_indice[indice1]
     elif tsm_condition == 6:
         """ tsm++mean"""
-        for transcript_1 in transcripts:
-            row = []
-            for transcript_2 in transcripts:
-                gene_tr_1 = df_gtot[df_gtot['id_transcript'] == transcript_1].id_gene.values[0]
-                gene_tr_2 = df_gtot[df_gtot['id_transcript'] == transcript_2].id_gene.values[0]
-                score_nuc_hom_v2 = round(compute_nuchom_score_tsmplus(transcript_1, transcript_2, df_transcripts, gene_tr_1, gene_tr_2, df_gtot),3)
-                score_deg_hom_v2 = round(compute_deghom_score_tsmplus(transcript_1, transcript_2, df_blocks_transcripts, df_blocks_genes, gene_tr_1, gene_tr_2),3)
-                score_tsmplus = round(((score_nuc_hom_v2+score_deg_hom_v2)/2),3)
-                row.append(score_tsmplus)
-            matrix.append(row)
+        gene_model = get_gene_model(df_gtot, df_transcripts)
+        for i, transcript_1 in enumerate(transcripts):
+            for j, transcript_2 in enumerate(transcripts):
+                if transcript_1 == transcript_2:
+                    matrix[i,j] = 1.0
+                else:
+                    indice1 = transcript_1+'&'+transcript_2
+                    indice2 = transcript_2+'&'+transcript_1
+                    if indice1 not in list(used_indice.keys()) and indice2 not in list(used_indice.keys()):
+                        gene_tr_1 = df_gtot[df_gtot['id_transcript'] == transcript_1].id_gene.values[0]
+                        gene_tr_2 = df_gtot[df_gtot['id_transcript'] == transcript_2].id_gene.values[0]
+                        score_nuc_hom_v2 = round(compute_nuchom_score_tsmplus(transcript_1, transcript_2, df_transcripts, gene_tr_1, gene_tr_2, gene_model),3)
+                        score_deg_hom_v2 = round(compute_deghom_score_tsmplus(transcript_1, transcript_2, df_blocks_transcripts, df_blocks_genes, gene_tr_1, gene_tr_2),3)
+                        score_tsmplus = round(((score_nuc_hom_v2+score_deg_hom_v2)/2),3)
+                        matrix[i, j] = score_tsmplus
+                        used_indice[indice1] = score_tsmplus
+                        used_indice[indice2] = score_tsmplus
+                    else :
+                        matrix[i, j] = used_indice[indice1]
     else:
         raise Exception('Error! the value of tsm parameter does not match!')
     df_matrix = pd.DataFrame(matrix, index=transcripts, columns=transcripts)
     return df_matrix
+
+def get_gene_model(df_gtot, df_transcripts):
+    list_all_distinct_genes = list(pd.Categorical(df_gtot['id_gene'].values))
+    list_save_id_gene = []
+    list_save_sequences = []
+    for distinct_gene in list_all_distinct_genes:
+        list_all_distinct_transcripts = list(pd.Categorical(df_gtot[df_gtot['id_gene']==distinct_gene].id_transcript.values))
+        list_all_alg_distinct_transcripts = list(df_transcripts[df_transcripts['id_transcript'].isin(list_all_distinct_transcripts)].alg.values)
+        length_seq = len(list_all_alg_distinct_transcripts[0])
+        list_save_id_gene.append(distinct_gene)
+        list_save_sequence = []
+        for position in range(length_seq):
+            is_conserved = True
+            for alg_distinct_transcript in list_all_alg_distinct_transcripts:
+                if alg_distinct_transcript[position] == '-':
+                    list_save_sequence.append('-')
+                    is_conserved = False
+                    break
+                if is_conserved:
+                    list_save_sequence.append('c')
+        list_save_sequences.append(''.join(list_save_sequence))
+    df = pd.DataFrame(columns=['id_gene','gene_model'])
+    df['id_gene'] = list_save_id_gene
+    df['gene_model'] = list_save_sequences
+    return df
 
 def compute_deghom_score_tsmplus(tr_id, tr_ref, transcripts_blocks,data_block_alg_gene, g_id, g_ref ):
     """
@@ -307,33 +384,21 @@ def compute_deghom_score_tsmplus(tr_id, tr_ref, transcripts_blocks,data_block_al
     score = len(intersect_set)/len(denum_list)   
     return score
 
-def nucleotide_in_gene(gene_tr1, position, data_alg_seq, df_gtot):
-    transcripts_in_gene1 = list(pd.Categorical(df_gtot[df_gtot['id_gene']==gene_tr1].id_transcript.values))
-    #transcripts_in_gene2 = list(pd.Categorical(df_gtot[df_gtot['id_gene']==gene_tr2].id_transcript.values))
-    bool_nuc1 = False
-    #bool_nuc2 = False
-    for transcript1 in transcripts_in_gene1:
-        nuc1 = data_alg_seq[data_alg_seq['id_transcript']==transcript1].alg.values[0][position]
-        if nuc1 != '-':
-            bool_nuc1 = True
-            break
-    '''for transcript2 in transcripts_in_gene2:
-        nuc2 = data_alg_seq[data_alg_seq['id_transcript']==transcript2].alg.values[0][position]
-        if nuc2 != '-':
-            bool_nuc2 = True
-            break'''
-    
-    return bool_nuc1
+def nucleotide_in_gene(gene_tr, position, gene_model):
+    gene_model_seq = gene_model[gene_model['id_gene']==gene_tr].gene_model.values[0]
+    if gene_model_seq[position] == '-':
+        return False
+    elif gene_model_seq[position] == 'c':
+        return True
+    else:
+        raise ValueError('Could not find the conservation into the gene model')
 
-def compute_nuchom_score_tsmplus(transcript_1, transcript_2, data_alg_seq, gene_tr_1, gene_tr_2, df_gtot):
+def compute_nuchom_score_tsmplus(transcript_1, transcript_2, data_alg_seq, gene_tr_1, gene_tr_2, gene_model):
     """
         Compute nucHom score (do not account for nucleotides not appearing at the gene level)
     """
     alignment_tr1 = data_alg_seq[data_alg_seq['id_transcript']==transcript_1].alg.values[0]
     alignment_tr2 = data_alg_seq[data_alg_seq['id_transcript']==transcript_2].alg.values[0]
-
-    #alignment_g1 = data_alg_gene_seq[data_alg_gene_seq['id_gene']==gene_tr_1].alg.values[0]
-    #alignment_g2 = data_alg_gene_seq[data_alg_gene_seq['id_gene']==gene_tr_2].alg.values[0]
    
     length_alignment_tr1 = len(alignment_tr1)
     length_alignment_tr2 = len(alignment_tr2)
@@ -351,14 +416,11 @@ def compute_nuchom_score_tsmplus(transcript_1, transcript_2, data_alg_seq, gene_
                 matchs_mismatchs += 1
             elif(((nucleotide_tr1 == '-') and (nucleotide_tr2 != '-'))) or ((nucleotide_tr1 != '-') and (nucleotide_tr2 == '-')):
                 indel += 1
-                #nuc_g1 = alignment_g1[position]
-                #nuc_g2 = alignment_g2[position]
-                #nuc_g1, nuc_g2 = nucleotide_in_gene(gene_tr_1, gene_tr_2, position, data_alg_seq, df_gtot)
                 if (nucleotide_tr1 != '-') and (nucleotide_tr2 == '-'):
-                    nuc_g2 = nucleotide_in_gene(gene_tr_2, position, data_alg_seq, df_gtot)
+                    nuc_g2 = nucleotide_in_gene(gene_tr_2, position, gene_model)
                     nuc_g1 = True
                 else:
-                    nuc_g1 = nucleotide_in_gene(gene_tr_1, position, data_alg_seq, df_gtot)
+                    nuc_g1 = nucleotide_in_gene(gene_tr_1, position, gene_model)
                     nuc_g2 = True
                     
                 if nuc_g1 and nuc_g2:
