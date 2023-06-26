@@ -10,8 +10,8 @@
 __authors__ = ("Wend Yam Donald Davy Ouedraogo")
 __contact__ = ("wend.yam.donald.davy.usherbrooke.ca")
 __copyright__ = "CoBIUS lab at Université de Sherbrooke, QC, CANADA"
-__date__ = "2022-12-19"
-__version__= "1.0.2"
+__date__ = "2023-06-26"
+__version__= "2.0.1"
 
 
 import argparse
@@ -30,7 +30,7 @@ def build_arg_parser():
     parser.add_argument('-outf', '--outputfolder', default='.', help='the output folder to store the results')
     return parser
 
-def inferring_transcripts_isoortholoy(transcripts_msa_path, gtot_path, gt_path, tsm_conditions, lower_bound, output_folder):
+def inferring_transcripts_isoorthology(transcripts_msa_path, gtot_path, gt_path, tsm_conditions, lower_bound, output_folder):
     """inferring transcript isoorthologies"""
     try:
         tsm_matrix, df_blocks_transcripts, df_blocks_genes = get_matrix(transcripts_msa_path, gtot_path, tsm_conditions, output_folder)
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     output_folder = args.outputfolder
 
     #compute the main algorithm
-    tsm_matrix, df_blocks_transcripts, df_blocks_genes, clusters, df, df_orthology = inferring_transcripts_isoortholoy(transcripts_msa_path, gtot_path, gt_path, tsm_conditions, lower_bound, output_folder)
+    tsm_matrix, df_blocks_transcripts, df_blocks_genes, clusters, df, df_orthology = inferring_transcripts_isoorthology(transcripts_msa_path, gtot_path, gt_path, tsm_conditions, lower_bound, output_folder)
     
     # finish
     print('++++++++++++++++Finished \n\n Succesful. Data results can be found in {}'.format(output_folder))

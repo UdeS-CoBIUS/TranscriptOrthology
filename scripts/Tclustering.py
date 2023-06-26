@@ -10,8 +10,8 @@
 __authors__ = ("Wend Yam Donald Davy Ouedraogo")
 __contact__ = ("wend.yam.donald.davy.usherbrooke.ca")
 __copyright__ = "CoBIUS lab at Université de Sherbrooke, QC, CANADA"
-__date__ = "2022-12-19"
-__version__= "1.0.2"
+__date__ = "2023-06-26"
+__version__= "2.0.1"
 
 import pandas as pd
 import networkx as nx
