@@ -201,53 +201,35 @@ def get_conserved_clusters(graphData, inParalogs, g, output_folder):
 
 
     edges_data = edges_data.sort_values(by=['score'], ascending=False)
-
+    
     for index_edge, row_edge in edges_data.iterrows():
         transcript_id = row_edge['pair_id']
         transcript_ref = row_edge['pair_ref']
-
+        
+        # get the CC of the two transcripts
         adj_trID_with_weight = G.adj[transcript_id]
         adj_trID = [ _ for _ in list(adj_trID_with_weight.keys()) if _ != transcript_ref]
+        
         adj_trREF_with_weight = G.adj[transcript_ref]
         adj_trREF = [ _ for _ in list(adj_trREF_with_weight.keys()) if _ != transcript_id]
-        
-        genes_adj_trID = list(set([g[g['id_transcript']==tr].id_gene.values[0] for tr in adj_trID]))
-        genes_adj_trREF = list(set([g[g['id_transcript']==tr].id_gene.values[0] for tr in adj_trREF]))
-
-        intersect_genes = list(set(genes_adj_trID).intersection(set(genes_adj_trREF)))
-
-        if len(intersect_genes) == 0:
+                
+        if set(adj_trREF) == set(adj_trID):
             G.add_edge(transcript_id, transcript_ref)
         else:
-            for intersect_gene in intersect_genes:
-                spes_adj_trID = [ _ for _ in adj_trID if g[g['id_transcript']==_].id_gene.values[0]==intersect_gene]
-                spes_adj_trREF = [ _ for _ in adj_trREF if g[g['id_transcript']==_].id_gene.values[0]==intersect_gene]
+            merge = True
+            current_edges =list(G.edges())
+            for transcript_adj_ref in adj_trREF:
+                gene_transcript_adj_ref = g[g['id_transcript']==transcript_adj_ref].id_gene.values
+                for transcript_adj_id in adj_trID:
+                    gene_transcript_adj_id = g[g['id_transcript']==transcript_adj_id].id_gene.values
+                    if transcript_adj_id != transcript_adj_ref:
+                        current_edge = (transcript_adj_id, transcript_adj_ref)
+                        if (gene_transcript_adj_id == gene_transcript_adj_ref) and (current_edge not in current_edges):
+                            merge = False
+                            break
+            if merge:
+                G.add_edge(transcript_id, transcript_ref)
 
-                
-                list_inParalogs_adj_trID = []
-                inParalogs_adj_trID = [inParalogs[_] for _ in spes_adj_trID]
-                for spe_adj_trID in spes_adj_trID:
-                    inParalogs_adj_trID = inParalogs[spe_adj_trID]
-                    for inparalog_adj_trID in inParalogs_adj_trID:
-                        list_inParalogs_adj_trID.append(inparalog_adj_trID)
-                
-                list_inParalogs_adj_trREF = []
-                inParalogs_adj_trREF = [inParalogs[_] for _ in spes_adj_trREF]
-                for spe_adj_trREF in spes_adj_trREF:
-                    inParalogs_adj_trREF = inParalogs[spe_adj_trREF]
-                    for inparalog_adj_trREF in inParalogs_adj_trREF:
-                        list_inParalogs_adj_trREF.append(inparalog_adj_trREF)
-
-                list_inParalogs_adj_trID.extend(spes_adj_trID)
-                list_inParalogs_adj_trREF.extend(spes_adj_trREF)
-                set_id = set(list_inParalogs_adj_trID)
-                set_ref =set(list_inParalogs_adj_trREF)
-
-                inter_set = set_id.intersection(set_ref)
-
-                if len(inter_set) == len(set_id) and len(inter_set) == len(set_ref):
-                #if len(inter_set) == max(len(set_id), len(set_ref)):
-                    G.add_edge(transcript_id, transcript_ref)
     if is_saving:
         plt.clf()
         nx.draw(G, with_labels=True)
