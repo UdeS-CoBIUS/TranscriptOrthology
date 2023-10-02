@@ -16,7 +16,7 @@
 <!-- TABLE OF CONTENTS -->
 <h2 id="table-of-contents"> :book: Table of Contents</h2>
 
-<details open="open">
+<details open="close">
   <summary>Inferring clusters of orthologous and paralogous transcripts</summary>
   <ol>
     <li><a href="#about-the-project"> ➤ About The Project</a>
@@ -41,27 +41,27 @@
   </ol>
 </details>
 
-<details open="open">
+<details open="close">
   <summary>Inferring Transcript Phylogenies</summary>
   <ol>
-    <li><a href="#about-the-project"> ➤ About The Project</a>
+    <li><a href="#about-the-project-2"> ➤ About The Project</a>
     <ol>
-    <a href="#overview"> ➤ Overview</a></ol>
+    <a href="#overview-2"> ➤ Overview</a></ol>
     <ol>
-    <a href="#requirements"> ➤ Requirements</a>
+    <a href="#requirements-2"> ➤ Requirements</a>
     </ol>
     <ol>
-    <a href="#package"> ➤ Package Pypi</a>
+    <a href="#package-2"> ➤ Package Pypi</a>
     </ol>
     </li>
-    <li><a href="#getting-started"> ➤ Getting Started</a>
-    <ol><a href="#main"> ➤ Main command/Execution</a></ol></li>
-    <li><a href="#project-files-description"> ➤ Project files descriptions </a>
+    <li><a href="#getting-started-2"> ➤ Getting Started</a>
+    <ol><a href="#main-2"> ➤ Main command/Execution</a></ol></li>
+    <li><a href="#project-files-description-2"> ➤ Project files descriptions </a>
     <ol>
-    <a href="#project-files-description-inputs"> ➤ Inputs description</a>
+    <a href="#project-files-description-inputs-2"> ➤ Inputs description</a>
     </ol>
-    <ol><a href="#project-files-description-outputs"> ➤ Outputs description</a></ol>
-    <ol><a href="#project-files-description-data"> ➤ Dataset</a></ol>
+    <ol><a href="#project-files-description-outputs-2"> ➤ Outputs description</a></ol>
+    <ol><a href="#project-files-description-data-2"> ➤ Dataset</a></ol>
     </ol></li>
   </ol>
 </details>
