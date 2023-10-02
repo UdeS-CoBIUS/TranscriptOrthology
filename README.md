@@ -12,7 +12,7 @@
 
 > :bulb: If you are using our algorithm in your research, please cite our recent paper: __Upcoming__ 
 
-> :e-mail: `Contact: wend.yam.donald.davy.ouedraogo@usherbrooke.ca`
+> :e-mail: __Contact: wend.yam.donald.davy.ouedraogo@usherbrooke.ca__
 
 
 <!-- TABLE OF CONTENTS -->
