@@ -19,7 +19,7 @@
 <h2 id="table-of-contents"> :book: Table of Contents</h2>
 
 <details open>
-  <summary>About the project</summary>
+  <summary><a href="#about-the-project">About the project</a></summary>
     <ol>
     <a href="#overview"> ➤ Overview</a></ol>
     <ol>
@@ -42,7 +42,7 @@
 </details>
 
 <details>
-  <summary>Inferring Transcript Phylogenies</summary>
+  <summary><a href="#phylogenies">Inferring Transcript Phylogenies</a></summary>
   <ol>
     <li><a href="#package-2"> ➤ Package Pypi</a></li>
     <li><a href="#getting-started-2"> ➤ Getting Started</a></li>
@@ -109,10 +109,6 @@ if __name__ == '__main__':
 
 <!-- Getting started -->
 <h2 id="getting-started"> :rocket: Getting Started</h2>
-
-
-<!-- Main Command -->
-<h3 id="main"> :computer: Main Command</h3>
 
 > Command
 
@@ -203,7 +199,6 @@ OR
 ++++++++++++++++Finished 
 </code></pre>
 
-
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <h2 id="project-files-description"> :file_folder: Project Files Description</h2>
@@ -269,6 +264,35 @@ __Outputs files__
 
 <br>
 ---
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+<!-- ABOUT THE PROJECT -->
+<h1 id="phylogenies"> Inferring phylogenies</h1>
+
+<!-- Package -->
+<h3 id="package"> :package: About the package</h3>
+
+``Upcoming``
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+
+<!-- Getting started -->
+<h2 id="getting-started-2"> :rocket: Getting Started</h2>
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+
+<h2 id="project-files-description-2"> :file_folder: Project Files Description</h2>
+
+<h3 id="project-files-description-inputs-2"> :keyboard: Inputs description </h3>
+
+<h3 id="project-files-description-outputs-2"> :minidisc: Outputs description </h3>
+
+<h3 id="project-files-description-data-2"> :heavy_check_mark: Dataset </h3>
+
 <br>
 <br>
 <br>
