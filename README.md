@@ -3,6 +3,7 @@
 
 <p align="center">
 <img src='./theme.png' alt='theme' width=auto height=300>
+<img src='./solution.svg' alt='theme-2'>
 </p>
 
 :busts_in_silhouette: __Authors__
