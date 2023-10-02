@@ -27,7 +27,7 @@
 </details>
 
 <details>
-  <summary>Inferring clusters of orthologous and paralogous transcripts</summary>
+  <summary><a href="#clustering">Inferring clusters of orthologous and paralogous transcripts</a></summary>
   <ol>
     <li><a href="#package"> ➤ Package Pypi</a></li>
     <li><a href="#getting-started"> ➤ Getting Started</a></li>
@@ -59,16 +59,15 @@
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- ABOUT THE PROJECT -->
-<h2 id="about-the-project"> :pencil: About The Project</h2>
+<h1 id="about-the-project"> :pencil: About The Project</h1>
 
 
 <!-- OVERVIEW -->
 <h3 id="overview"> :cloud: Overview</h3>
 
-`A graph-based method to infer isoorthology & recent paralogy relations in a set of homologous transcripts:dna:`
+`We present an algorithm for inferring clusters of orthologous and paralogous transcripts and a progressive supertree construction algorithm that employs a dynamic programming approach to infer transcript phylogenies based on the inferred clusters.`
 
 ---
-
 
 <!-- Requirements -->
 <h3 id="requirements"> :hammer_and_pick: Requirements</h3>
@@ -78,9 +77,13 @@
 *   __`Pandas`__
 *   __`Numpy`__
 *   __`ETE toolkit`__
+*   __`phylotreelib`__
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+<!-- ABOUT THE PROJECT -->
+<h1 id="clustering"> Inferring clusters of orthologous and paralogous transcripts</h1>
 
 <!-- Package -->
 <h3 id="package"> :package: About the package</h3>
