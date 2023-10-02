@@ -1,0 +1,8 @@
+joining fragments
+finished joining fragments
+making gene tree
+completed gene tree
+MAIN:inferred ancestral seqs
+MAIN:got branch lengths
+((transcript37_ENSRNOG00000031503:0.000,transcript44_ENSRNOG00000031503:0.000,transcript36_ENSRNOG00000031503:0.000):0.073,(transcript7_MGP-PahariEiJ-G0020237:0.000,transcript9_MGP-PahariEiJ-G0020237:0.000,transcript37_MGP-PahariEiJ-G0020237:0.000,transcript39_MGP-PahariEiJ-G0020237:0.000,transcript49_MGP-PahariEiJ-G0020237:0.000,transcript51_MGP-PahariEiJ-G0020237:0.000,transcript52_MGP-PahariEiJ-G0020237:0.000,transcript50_MGP-PahariEiJ-G0020237:0.000):0.073);
+MAIN:printed gene tree

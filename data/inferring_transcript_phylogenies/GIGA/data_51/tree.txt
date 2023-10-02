@@ -1,0 +1,8 @@
+joining fragments
+finished joining fragments
+making gene tree
+completed gene tree
+MAIN:inferred ancestral seqs
+MAIN:got branch lengths
+(transcript24_ENSNGAG00000018584:0.134,(((transcript28_MGP-CAROLIEiJ-G0020234:0.024,transcript28_ENSMUSG00000054036:0.201):0.030,transcript28_MGP-PahariEiJ-G0020237:0.050):0.079,(transcript7_ENSRNOG00000031503:0.000,transcript28_ENSRNOG00000031503:0.000,transcript24_ENSRNOG00000031503:0.000):0.081):0.134);
+MAIN:printed gene tree

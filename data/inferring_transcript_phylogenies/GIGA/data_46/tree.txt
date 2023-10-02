@@ -1,0 +1,10 @@
+Sequence transcript7_ENSMLUG00000027828 (index 8) is a fragment (81 of 204 positions aligned). Not used to build tree. Removed during prefiltering.
+Nearest sequence is transcript12_ENSMLUG00000027828
+joining fragments
+finished joining fragments
+making gene tree
+completed gene tree
+MAIN:inferred ancestral seqs
+MAIN:got branch lengths
+((((transcript25_ENSMPUG00000020072:0.000,transcript28_ENSMPUG00000020072:0.000,transcript7_ENSMPUG00000020072:0.000):0.103,(transcript23_ENSECAG00000007947:0.000,transcript31_ENSECAG00000007947:0.000,transcript32_ENSECAG00000007947:0.000,transcript33_ENSECAG00000007947:0.000,transcript12_ENSECAG00000007947:0.000):0.103):0.031,(transcript7_ENSMLUG00000027828:2.000,transcript15_ENSMLUG00000027828:0.077,transcript16_ENSMLUG00000027828:0.077,transcript25_ENSMLUG00000027828:0.077,transcript26_ENSMLUG00000027828:0.077,transcript27_ENSMLUG00000027828:0.077,transcript12_ENSMLUG00000027828:0.077):0.090):0.053,(transcript7_ENSSTOG00000019743:0.126,transcript7_ENSCCNG00000000226:0.126):0.053);
+MAIN:printed gene tree

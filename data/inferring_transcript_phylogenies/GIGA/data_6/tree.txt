@@ -1,0 +1,14 @@
+Sequence transcript8_ENSHGLG00100006079 (index 1) is a fragment (0 of 342 positions aligned). Not used to build tree. Removed during prefiltering.
+Nearest sequence is 
+Sequence transcript7_ENSPCIG00000036398 (index 3) is a fragment (0 of 342 positions aligned). Not used to build tree. Removed during prefiltering.
+Nearest sequence is 
+Sequence transcript7_ENSXMAG00000026005 (index 10) is a fragment (0 of 342 positions aligned). Not used to build tree. Removed during prefiltering.
+Nearest sequence is 
+joining fragments
+finished joining fragments
+making gene tree
+completed gene tree
+MAIN:inferred ancestral seqs
+MAIN:got branch lengths
+((((transcript6_ENSPCIG00000036398:0.231,transcript2_ENSHGLG00100006079:0.261):0.132,(((transcript16_ENSMUNG00000007775:0.000,transcript23_ENSMUNG00000007775:0.000,transcript7_ENSMUNG00000007775:0.000):0.021,transcript16_ENSMUNG00000002377:0.036):0.132,transcript10_ENSMUNG00000002391:0.142):0.195):0.374,(transcript8_ENSXMAG00000026005:0.000,transcript9_ENSXMAG00000026005:0.000,transcript10_ENSXMAG00000026005:0.000,transcript2_ENSXMAG00000026005:0.000):0.551):2.000,transcript8_ENSHGLG00100006079:2.000,transcript7_ENSPCIG00000036398:2.000,transcript7_ENSXMAG00000026005:2.000);
+MAIN:printed gene tree

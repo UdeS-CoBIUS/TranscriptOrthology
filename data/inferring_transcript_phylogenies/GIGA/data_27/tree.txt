@@ -1,0 +1,12 @@
+Sequence transcript27_ENSCPOG00000024843 (index 6) is a fragment (0 of 99 positions aligned). Not used to build tree. Removed during prefiltering.
+Nearest sequence is 
+Sequence transcript34_ENSCPOG00000024843 (index 7) is a fragment (0 of 99 positions aligned). Not used to build tree. Removed during prefiltering.
+Nearest sequence is 
+joining fragments
+finished joining fragments
+making gene tree
+completed gene tree
+MAIN:inferred ancestral seqs
+MAIN:got branch lengths
+(((((transcript8_ENSMPUG00000020072:0.052,(transcript33_ENSECAG00000007947:0.000,transcript8_ENSECAG00000007947:0.000):0.031):0.073,transcript8_ENSMLUG00000027828:0.096):0.010,(transcript13_ENSCCNG00000000226:0.084,transcript12_ENSCPOG00000024843:0.118):0.042):0.183,transcript8_ENSLAFG00000030854:0.214):2.000,transcript27_ENSCPOG00000024843:2.000,transcript34_ENSCPOG00000024843:2.000);
+MAIN:printed gene tree

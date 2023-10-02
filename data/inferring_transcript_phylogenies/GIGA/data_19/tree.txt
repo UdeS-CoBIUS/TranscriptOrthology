@@ -1,0 +1,8 @@
+joining fragments
+finished joining fragments
+making gene tree
+completed gene tree
+MAIN:inferred ancestral seqs
+MAIN:got branch lengths
+((((transcript5_ENSHGLG00100006079:0.000,transcript16_ENSHGLG00100006079:0.000,transcript17_ENSHGLG00100006079:0.000,transcript18_ENSHGLG00100006079:0.000):0.118,(transcript19_ENSHGLG00100003156:0.000,transcript5_ENSHGLG00100003156:0.000):0.133):0.253,transcript5_ENSPCIG00000036398:0.281):0.218,transcript13_ENSMUNG00000002391:0.218);
+MAIN:printed gene tree

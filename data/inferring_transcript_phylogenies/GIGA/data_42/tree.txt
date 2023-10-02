@@ -1,0 +1,10 @@
+Sequence transcript47_MGP-SPRETEiJ-G0021131 (index 1) is a fragment (270 of 402 positions aligned). Not used to build tree. Removed during join of seqs 0 1 (dist 0.01).
+Nearest sequence is transcript8_ENSMSIG00000000513
+joining fragments
+finished joining fragments
+making gene tree
+completed gene tree
+MAIN:inferred ancestral seqs
+MAIN:got branch lengths
+((((transcript42_ENSRNOG00000031503:0.000,transcript8_ENSRNOG00000031503:0.000):0.130,((transcript8_ENSMSIG00000000513:0.411,transcript47_MGP-SPRETEiJ-G0021131:2.000):0.004,(transcript42_ENSMUSG00000054036:0.000,transcript47_ENSMUSG00000054036:0.000,transcript54_ENSMUSG00000054036:0.000,transcript55_ENSMUSG00000054036:0.000,transcript8_ENSMUSG00000054036:0.000):0.026):0.417):0.092,((transcript44_ENSMUGG00000013649:0.000,transcript47_ENSMUGG00000013649:0.000,transcript48_ENSMUGG00000013649:0.000,transcript7_ENSMUGG00000013649:0.000):0.007,(transcript28_ENSMUGG00000013592:0.000,transcript52_ENSMUGG00000013592:0.000,transcript53_ENSMUGG00000013592:0.000,transcript54_ENSMUGG00000013592:0.000,transcript7_ENSMUGG00000013592:0.000):0.010):0.131):0.072,transcript25_ENSPEMG00000024651:0.072);
+MAIN:printed gene tree

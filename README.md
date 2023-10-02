@@ -338,11 +338,11 @@ OR
 
 <h2 id="project-files-description-2"> :file_folder: Project Files Description</h2>
 
-<h3 id="project-files-description-inputs-2"> :keyboard: Inputs description </h3>
-
 <h3 id="project-files-description-outputs-2"> :minidisc: Outputs description </h3>
 
 <h3 id="project-files-description-data-2"> :heavy_check_mark: Dataset </h3>
+
+``The folder data contains dataset used for the studies and also the results obtained.``
 
 <br>
 <br>

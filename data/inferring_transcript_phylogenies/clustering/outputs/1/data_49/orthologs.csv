@@ -1,0 +1,12 @@
+id_transcript;recent-paralogs;ortho-orthologs;para-orthologs;#cluster
+transcript7_MGP-PahariEiJ-G0020237;null;transcript36_ENSRNOG00000031503|0.986;null;0
+transcript36_ENSRNOG00000031503;null;transcript7_MGP-PahariEiJ-G0020237|0.986;null;0
+transcript9_MGP-PahariEiJ-G0020237;null;null;null;1
+transcript37_MGP-PahariEiJ-G0020237;transcript50_MGP-PahariEiJ-G0020237|0.989;transcript44_ENSRNOG00000031503|0.986&transcript37_ENSRNOG00000031503|0.986;null;2
+transcript44_ENSRNOG00000031503;transcript37_ENSRNOG00000031503|1.0;transcript37_MGP-PahariEiJ-G0020237|0.986;null;2
+transcript50_MGP-PahariEiJ-G0020237;transcript37_MGP-PahariEiJ-G0020237|0.989;null;null;2
+transcript37_ENSRNOG00000031503;transcript44_ENSRNOG00000031503|1.0;transcript37_MGP-PahariEiJ-G0020237|0.986;null;2
+transcript39_MGP-PahariEiJ-G0020237;transcript49_MGP-PahariEiJ-G0020237|0.999;null;null;3
+transcript49_MGP-PahariEiJ-G0020237;transcript39_MGP-PahariEiJ-G0020237|0.999;null;null;3
+transcript51_MGP-PahariEiJ-G0020237;transcript52_MGP-PahariEiJ-G0020237|0.999;null;null;4
+transcript52_MGP-PahariEiJ-G0020237;transcript51_MGP-PahariEiJ-G0020237|0.999;null;null;4
