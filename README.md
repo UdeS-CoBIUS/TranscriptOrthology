@@ -102,7 +102,7 @@ if __name__ == '__main__':
   tsm_conditions = 2
   output_folder = './execution/output_folder'
   
-  <span style="color:red;">inferring_transcripts_isoorthology</span>(<span style="color:red;">transcripts_msa_path</span>, <span style="color:green;">gtot_path</span>, <span style="color:purple;">gt_path</span>,<span style="color:orange;">tsm_conditions</span>,<span style="color:yellow;">lower_bound</span>,<span style="color:gray;">output_folder</span>)</code></pre>
+  <span style="color:red;">inferring_transcripts_isoorthology</span>(<span style="color:red;">transcripts_msa_path</span>, <span style="color:green;">gtot_path</span>, <span style="color:purple;">gt_path</span>, <span style="color:orange;">tsm_conditions</span>, <span style="color:yellow;">lower_bound</span>, <span style="color:gray;">output_folder</span>)</code></pre>
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -129,7 +129,7 @@ optional arguments:
   -nhxt NHXGENETREE, --nhxgenetree NHXGENETREE
                         NHX gene tree
   -lowb LOWERBOUND, --lowerbound LOWERBOUND
-                        a lower bound for the selection of transcripts RBHs
+                        a threshold for the selection of transcripts RBHs
   -tsm TSMVALUE, --tsmvalue TSMVALUE
                         an integer(1|2|3|4|5|6) that refers to the transcript
                         similarity measure
@@ -180,7 +180,7 @@ optional arguments:
 
 <pre><code>python3 ./scripts/transcriptOrthology.py -talg ./execution/inputs/transcripts_alignments/ENSGT00390000000104.alg -gtot ./execution/inputs/mapping_gene_to_transcripts/ENSGT00390000000104.fasta -nhxt ./execution/inputs/NHX_trees/ENSGT00390000000104.nwk -lowb 0.7 -outf ./execution/outputs/ -tsm 1</code></pre>
 OR
-<pre><code>sh ./execution.sh</code></pre>
+<pre><code>sh ./execution_inferring_clusters.sh</code></pre>
 
 > Output expected
 
@@ -242,7 +242,6 @@ optional arguments:
   <li>:three:
     <em>transcriptOthology()</em> :arrow_right: returns for each pair of homologous transcripts, their homology relationship type (recent-paralogs, ortho-paralogs or ortho-orthologs).
   </li>
-
 </ul>
 
 --- 

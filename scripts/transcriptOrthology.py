@@ -25,7 +25,7 @@ def build_arg_parser():
     parser.add_argument('-talg', '--tralignment', required=True, default=None, help='Multiple Sequences Alignment of transcripts in FASTA format')
     parser.add_argument('-gtot', '--genetotranscripts',required=True, default=None, help="mappings transcripts to corresponding genes")
     parser.add_argument('-nhxt', '--nhxgenetree',required=True, default=None, help='NHX gene tree')
-    parser.add_argument('-lowb', '--lowerbound', default=0.0, help='a lower bound for the selection of transcripts RBHs')
+    parser.add_argument('-lowb', '--lowerbound', default=0.0, help='a threshold for the selection of transcripts RBHs')
     parser.add_argument('-tsm', '--tsmvalue', default=1, help='an integer(1|2|3|4|5|6) that refers to the transcript similarity measure')
     parser.add_argument('-outf', '--outputfolder', default='.', help='the output folder to store the results')
     return parser
