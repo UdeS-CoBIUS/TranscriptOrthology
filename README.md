@@ -16,7 +16,7 @@
 <!-- TABLE OF CONTENTS -->
 <h2 id="table-of-contents"> :book: Table of Contents</h2>
 
-<details open="close">
+<details>
   <summary>Inferring clusters of orthologous and paralogous transcripts</summary>
   <ol>
     <li><a href="#about-the-project"> ➤ About The Project</a>
@@ -41,7 +41,7 @@
   </ol>
 </details>
 
-<details open="close">
+<details>
   <summary>Inferring Transcript Phylogenies</summary>
   <ol>
     <li><a href="#about-the-project-2"> ➤ About The Project</a>
