@@ -10,8 +10,8 @@
 __authors__ = ("Wend Yam Donald Davy Ouedraogo")
 __contact__ = ("wend.yam.donald.davy.usherbrooke.ca")
 __copyright__ = "CoBIUS lab at Université de Sherbrooke, QC, CANADA"
-__date__ = "2023-06-26"
-__version__= "2.0.6"
+__date__ = "2022-12-19"
+__version__= "1.0.2"
 
 import pandas as pd
 import networkx as nx
@@ -26,7 +26,7 @@ def build_arg_parser():
     parser.add_argument('-m', '--matrix', default=None)
     parser.add_argument('-gtot', '--genetotranscripts', default=None)
     parser.add_argument('-nhxt', '--nhxgenetree', default=None)
-    parser.add_argument('-lowb', '--lowerbound', default=0.5)
+    parser.add_argument('-lowb', '--lowerbound', default=0.0)
     parser.add_argument('-outf', '--outputfolder', default='.')
     return parser
 
@@ -54,7 +54,7 @@ def get_orthology_graph(matrix, gtot_path, gt_path, lower_bound, output_folder):
     try:
         start3 = time.time()
         print('+++++ Construction of the orthology graph (Adding nodes ...) ... \tstatus: processing')
-        clusters = get_conserved_clusters(graphG, recent_paralogs, df_gtot, output_folder)
+        clusters = get_conserved_clusters(graphG, df_gtot, output_folder)
         end3 = time.time()
         print('+++++ Construction of the orthology graph (Adding nodes ...) ... \tstatus: finished in {} seconds'.format(str(end3-start3)))
     except:
@@ -63,13 +63,14 @@ def get_orthology_graph(matrix, gtot_path, gt_path, lower_bound, output_folder):
     try:
         start4 = time.time()
         print('+++++ Searching for connected components ... \tstatus: processing')
-        df, df_orthology = write_results(clusters, df_gtot, matrix, gt_path, output_folder)
+        # df, df_orthology = write_results(clusters, df_gtot, matrix, gt_path, output_folder)
+        df_orthology = write_results(clusters, df_gtot, matrix, gt_path, output_folder)
         end4 = time.time()
         print('+++++ Searching for connected components ... \tstatus: finished in {} seconds'.format(str(end4-start4)))
 
     except:
         raise('Failed to save results ! Errors occured.')
-    return clusters, df, df_orthology
+    return clusters, df_orthology
 
 def convert_inputs_data(gtot_path):
     df_gtot = pd.DataFrame(columns=['id_transcript','id_gene'])
@@ -182,7 +183,7 @@ def rhb_clustering(matrix, g, inparalogs, lower_bound):
     df_edges_rbhs = pd.DataFrame(data={'pair_id': pair_id, 'pair_ref': pair_ref, 'score': score_pair})
     return G, df_edges_rbhs
 
-def get_conserved_clusters(graphData, inParalogs, g, output_folder):
+def get_conserved_clusters(graphData, g, output_folder):
     """Returns the conserved clusters -- inference of transcripts homologies"""
     
     is_saving = False
@@ -235,10 +236,124 @@ def get_conserved_clusters(graphData, inParalogs, g, output_folder):
         nx.draw(G, with_labels=True)
         #plt.show(G)
         plt.savefig('{}/end_orthology_graph.pdf'.format(output_folder))
-    clusters_components = [list(G.subgraph(c).copy()) for c in nx.connected_components(G)]
+    #clusters_components = [list(G.subgraph(c).copy()) for c in nx.connected_components(G)]
+    clusters_components = [G.subgraph(c).copy() for c in nx.connected_components(G)]
     return clusters_components
 
 def write_results(clusters, df_gtot, matrix, gt_path, output_folder):
+    '''Write the results'''
+    print(clusters)
+    tree = Tree(gt_path, format=1)
+    df = pd.DataFrame(columns=['id_transcript', 'recent-paralogs', 'ortho-orthologs', 'para-orthologs', '#cluster'])
+    for number, cluster in enumerate(clusters):
+        connected_edges = cluster.edges()
+        print(connected_edges)
+        print(cluster.nodes())
+        if len(connected_edges) != 0:
+            #there is some connection
+            nodes_transcripts = cluster.nodes()
+            for node_transcript in nodes_transcripts:
+                tmp_recent_paralogs = []
+                tmp_ortho_orthologs = []
+                tmp_para_orthologs = []
+                tmp_number = number
+                g1 = df_gtot[df_gtot.id_transcript==node_transcript].id_gene.values[0]
+                for node_transcript_2 in nodes_transcripts:
+                    if node_transcript != node_transcript_2:
+                        if cluster.has_edge(node_transcript, node_transcript_2):
+                            g2 = df_gtot[df_gtot.id_transcript==node_transcript_2].id_gene.values[0]
+                            if g1 != g2:
+                                #isoorthologs
+                                node = tree.get_common_ancestor(g1, g2)
+                                lca_node = ''
+                                if hasattr(node, 'D'):
+                                    lca_node = list(node.D)[0]
+                                elif hasattr(node, 'DD'):
+                                    lca_node = list(node.DD)[0]
+                                if lca_node == 'Y':
+                                    score = str(matrix.loc[node_transcript, node_transcript_2])
+                                    tmp_para_orthologs.append(node_transcript_2+'|'+score)
+                                else:
+                                    score = str(matrix.loc[node_transcript, node_transcript_2])
+                                    tmp_ortho_orthologs.append(node_transcript_2+'|'+score)
+                                    
+                                pass
+                            else:
+                                #recentParalogs
+                                score = str(matrix.loc[node_transcript, node_transcript_2])
+                                tmp_recent_paralogs.append(node_transcript_2+'|'+score)
+                #write in df
+                save_tmp = [node_transcript]
+                if len(tmp_recent_paralogs) == 0:
+                    save_tmp.append('null')
+                else:
+                    save_tmp.append('&'.join(tmp_recent_paralogs))
+                
+                if len(tmp_ortho_orthologs) == 0:
+                    save_tmp.append('null')
+                else:
+                    save_tmp.append('&'.join(tmp_ortho_orthologs))
+                    
+                if len(tmp_para_orthologs) == 0:
+                    save_tmp.append('null')
+                else:
+                    save_tmp.append('&'.join(tmp_para_orthologs))
+                
+                df.loc[node_transcript] = [save_tmp[0], save_tmp[1], save_tmp[2], save_tmp[3], tmp_number]
+           
+            #pass
+        else:
+            #there is no connection
+            node_transcript = list(cluster.nodes())[0]
+            df.loc[node_transcript] = [node_transcript, 'null', 'null', 'null', number]
+            #pass
+    print(df)
+    df.to_csv('{}/orthologs.csv'.format(output_folder), sep=';', header=True, index=False)        
+    print('**********************88')
+    #for cluster in clusters:
+    #    if clus
+    '''
+    transcripts = list(df_gtot['id_transcript'].values)
+    tree = Tree(gt_path, format=1)
+    df_orthology = pd.DataFrame(columns=['id_transcript_1','id_transcript_2','homology'])
+    tsm_scores = []
+    conserved_transcripts = []
+    id_transcripts = []
+    already_done = []
+    for transcript in transcripts:
+        id_transcripts.append(transcript)
+        for cluster in clusters:
+            if transcript in cluster:
+                conserved_transcripts.append('|'.join([str(_) for _ in cluster if _ != transcript ]))
+                tsm_scores.append('|'.join([str(matrix.loc[transcript,_]) for _ in cluster if _ != transcript]))
+                for homolog in cluster:
+                    if homolog != transcript and str(homolog)+'<=>'+str(transcript) not in already_done:
+                        g1 = df_gtot[df_gtot.id_transcript==homolog].id_gene.values[0]
+                        g2 = df_gtot[df_gtot.id_transcript==transcript].id_gene.values[0]
+                        if g1 != g2:
+                            #print(tree)
+                            node = tree.get_common_ancestor(g1, g2)
+                            lca_node = ''
+                            if hasattr(node, 'D'):
+                                lca_node = list(node.D)[0]
+                            elif hasattr(node, 'DD'):
+                                lca_node = list(node.DD)[0]
+                            if lca_node == 'Y':
+                                df_orthology.loc[str(homolog)+'<=>'+str(transcript)] = [homolog, transcript, 'para-orthologs']
+                            else:
+                                df_orthology.loc[str(homolog)+'<=>'+str(transcript)] = [homolog, transcript, 'ortho-orthologs']
+                        else:
+                            df_orthology.loc[str(homolog)+str(transcript)] = [homolog, transcript, 'recent-paralogs']
+                        already_done.append(str(homolog)+'<=>'+str(transcript))
+                        already_done.append(str(transcript)+'<=>'+str(homolog))
+
+  
+    df = pd.DataFrame(data={'id_transcript':id_transcripts, 'isoorthologs|recent-paralogs': conserved_transcripts, 'tsm_scores': tsm_scores })
+    df.to_csv('{}/groupsOfOrthologs.csv'.format(output_folder), sep=';', header=True)
+    df_orthology.to_csv('{}/relationsOrthology.csv'.format(output_folder), sep=';', header=True)'''
+    return True
+
+def write_results2(clusters, df_gtot, matrix, gt_path, output_folder):
     '''Write the results'''
 
     transcripts = list(df_gtot['id_transcript'].values)
@@ -259,6 +374,7 @@ def write_results(clusters, df_gtot, matrix, gt_path, output_folder):
                         g1 = df_gtot[df_gtot.id_transcript==homolog].id_gene.values[0]
                         g2 = df_gtot[df_gtot.id_transcript==transcript].id_gene.values[0]
                         if g1 != g2:
+                            #print(tree)
                             node = tree.get_common_ancestor(g1, g2)
                             lca_node = ''
                             if hasattr(node, 'D'):

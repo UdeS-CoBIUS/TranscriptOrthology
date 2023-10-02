@@ -10,27 +10,27 @@
 __authors__ = ("Wend Yam Donald Davy Ouedraogo")
 __contact__ = ("wend.yam.donald.davy.usherbrooke.ca")
 __copyright__ = "CoBIUS lab at Université de Sherbrooke, QC, CANADA"
-__date__ = "2023-06-26"
-__version__= "2.0.6"
+__date__ = "2022-12-19"
+__version__= "1.0.2"
 
 
 import argparse
-from .Tclustering import get_orthology_graph
-from .tsmComputing import get_matrix
+from Tclustering import get_orthology_graph
+from tsmComputing import get_matrix
 
 
 def build_arg_parser():
     '''Parsing function'''
     parser = argparse.ArgumentParser(description="program parameters")
-    parser.add_argument('-talg', '--tralignment', default=None, help='Multiple Sequences Alignment of transcripts in FASTA format')
-    parser.add_argument('-gtot', '--genetotranscripts', default=None, help="mappings transcripts to corresponding genes")
-    parser.add_argument('-nhxt', '--nhxgenetree', default=None, help='NHX gene tree')
-    parser.add_argument('-lowb', '--lowerbound', default=0.7, help='a lower bound for the selection of transcripts RBHs')
+    parser.add_argument('-talg', '--tralignment', required=True, default=None, help='Multiple Sequences Alignment of transcripts in FASTA format')
+    parser.add_argument('-gtot', '--genetotranscripts',required=True, default=None, help="mappings transcripts to corresponding genes")
+    parser.add_argument('-nhxt', '--nhxgenetree',required=True, default=None, help='NHX gene tree')
+    parser.add_argument('-lowb', '--lowerbound', default=0.0, help='a lower bound for the selection of transcripts RBHs')
     parser.add_argument('-tsm', '--tsmvalue', default=1, help='an integer(1|2|3|4|5|6) that refers to the transcript similarity measure')
     parser.add_argument('-outf', '--outputfolder', default='.', help='the output folder to store the results')
     return parser
 
-def inferring_transcripts_isoorthology(transcripts_msa_path, gtot_path, gt_path, tsm_conditions, lower_bound, output_folder):
+def inferring_transcripts_isoortholoy(transcripts_msa_path, gtot_path, gt_path, tsm_conditions, lower_bound, output_folder):
     """inferring transcript isoorthologies"""
     try:
         tsm_matrix, df_blocks_transcripts, df_blocks_genes = get_matrix(transcripts_msa_path, gtot_path, tsm_conditions, output_folder)
@@ -38,12 +38,12 @@ def inferring_transcripts_isoorthology(transcripts_msa_path, gtot_path, gt_path,
         raise('Impossible to retrieve the matrix ! Errors occured ...')
     
     try:
-        clusters, df, df_orthology = get_orthology_graph(tsm_matrix, gtot_path, gt_path, lower_bound, output_folder)
+        clusters, df_orthology = get_orthology_graph(tsm_matrix, gtot_path, gt_path, lower_bound, output_folder)
     except:
         raise('Impossible de retrieve transcripts orthologs! Errors occured ... ')
     
     
-    return tsm_matrix, df_blocks_transcripts, df_blocks_genes, clusters, df, df_orthology
+    return tsm_matrix, df_blocks_transcripts, df_blocks_genes, clusters, df_orthology
 
 if __name__ == '__main__':
     # retrieve inputs given by user
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     output_folder = args.outputfolder
 
     #compute the main algorithm
-    tsm_matrix, df_blocks_transcripts, df_blocks_genes, clusters, df, df_orthology = inferring_transcripts_isoorthology(transcripts_msa_path, gtot_path, gt_path, tsm_conditions, lower_bound, output_folder)
+    tsm_matrix, df_blocks_transcripts, df_blocks_genes, clusters, df_orthology = inferring_transcripts_isoortholoy(transcripts_msa_path, gtot_path, gt_path, tsm_conditions, lower_bound, output_folder)
     
     # finish
     print('++++++++++++++++Finished \n\n Succesful. Data results can be found in {}'.format(output_folder))

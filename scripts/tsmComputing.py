@@ -10,8 +10,8 @@
 __authors__ = ("Wend Yam Donald Davy Ouedraogo")
 __contact__ = ("wend.yam.donald.davy.usherbrooke.ca")
 __copyright__ = "CoBIUS lab at Université de Sherbrooke, QC, CANADA"
-__date__ = "2023-06-26"
-__version__= "2.0.6"
+__date__ = "2022-12-19"
+__version__= "1.0.2"
 
 import pandas as pd
 import argparse
@@ -21,9 +21,9 @@ import numpy as np
 def build_arg_parser():
     '''Parsing function'''
     parser = argparse.ArgumentParser(description="parsor program parameter")
-    parser.add_argument('-talg', '--tralignment', default=None)
-    parser.add_argument('-gtot', '--genetotranscripts', default=None)
-    parser.add_argument('-tsm', '--tsmvalue', default=False)
+    parser.add_argument('-talg', '--tralignment', required=True, default=None)
+    parser.add_argument('-gtot', '--genetotranscripts', required=True, default=None)
+    parser.add_argument('-tsm', '--tsmvalue', required=True, default=False)
     parser.add_argument('-outf', '--outputfolder', default='.')
     return parser
 
@@ -179,7 +179,7 @@ def search_blocks_in_msa(list_of_ids_transcripts, blocks_data):
         j_data.append('|'.join([str(_) for _ in value_data]))
     df_results['id_transcript'] = i_data
     df_results['blocks'] = j_data
-
+    print(df_results)
     return df_results
 
 def inferred_genes_blocks(transcripts_blocks, df_gtot):
@@ -190,6 +190,7 @@ def inferred_genes_blocks(transcripts_blocks, df_gtot):
         transcripts = list(df_gtot[df_gtot['id_gene']==gene].id_transcript.values)
         list_of_nblocks = list(transcripts_blocks[transcripts_blocks['id_transcript'].isin(transcripts)].blocks.values)
         set_of_nblocks = [set(str(_).split('|')) for _ in list_of_nblocks]
+
         union_set_blocks = set()
         if len(set_of_nblocks) > 1:
             for i in range(len(set_of_nblocks)):
@@ -197,6 +198,7 @@ def inferred_genes_blocks(transcripts_blocks, df_gtot):
         else:
             union_set_blocks = set_of_nblocks[0]
         list_union_set_blocks = list(union_set_blocks)
+
         list_union_set_blocks_sorted = [str(_) for _ in sorted([int(_) for _ in list_union_set_blocks])]
         gene_blocks = '|'.join(list_union_set_blocks_sorted)
 
