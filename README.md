@@ -1,5 +1,5 @@
 
-# :dna: Inferring clusters of orthologous and paralogous transcripts
+# :dna: Inferring Transcript Phylogenies from Clusters of Orthologous and Paralogous Transcripts :dna:
 
 ``Algorithm to infer clusters of isoorthologous transcripts using gene-level homology relationships and a Reciprocal Best Hits approach``
 
