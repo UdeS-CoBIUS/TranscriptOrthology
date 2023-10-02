@@ -1,9 +1,6 @@
 
 # :dna: Inferring Transcript Phylogenies from Clusters of Orthologous and Paralogous Transcripts :dna:
 
-``Algorithm to infer clusters of isoorthologous transcripts using gene-level homology relationships and a Reciprocal Best Hits approach``
-
-
 <p align="center">
 <img src='./theme.png' alt='theme' width=auto height=300>
 </p>
@@ -20,7 +17,32 @@
 <h2 id="table-of-contents"> :book: Table of Contents</h2>
 
 <details open="open">
-  <summary>Table of Contents</summary>
+  <summary>Inferring clusters of orthologous and paralogous transcripts</summary>
+  <ol>
+    <li><a href="#about-the-project"> ➤ About The Project</a>
+    <ol>
+    <a href="#overview"> ➤ Overview</a></ol>
+    <ol>
+    <a href="#requirements"> ➤ Requirements</a>
+    </ol>
+    <ol>
+    <a href="#package"> ➤ Package Pypi</a>
+    </ol>
+    </li>
+    <li><a href="#getting-started"> ➤ Getting Started</a>
+    <ol><a href="#main"> ➤ Main command/Execution</a></ol></li>
+    <li><a href="#project-files-description"> ➤ Project files descriptions </a>
+    <ol>
+    <a href="#project-files-description-inputs"> ➤ Inputs description</a>
+    </ol>
+    <ol><a href="#project-files-description-outputs"> ➤ Outputs description</a></ol>
+    <ol><a href="#project-files-description-data"> ➤ Dataset</a></ol>
+    </ol></li>
+  </ol>
+</details>
+
+<details open="open">
+  <summary>Inferring Transcript Phylogenies</summary>
   <ol>
     <li><a href="#about-the-project"> ➤ About The Project</a>
     <ol>
