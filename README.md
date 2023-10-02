@@ -8,7 +8,7 @@
 </p>
 
 :busts_in_silhouette: __Authors__
-* `Wend Yam Donald Davy Ouedraogo & Aida Ouangraoua`, CoBIUS LAB, Department of Computer Science, Faculty of Science, Université de Sherbrooke, Sherbrooke, Canada*
+* __Wend Yam Donald Davy Ouedraogo & Aida Ouangraoua__, CoBIUS LAB, Department of Computer Science, Faculty of Science, Université de Sherbrooke, Sherbrooke, Canada*
 
 > :bulb: If you are using our algorithm in your research, please cite our recent paper: __Upcoming__ 
 
