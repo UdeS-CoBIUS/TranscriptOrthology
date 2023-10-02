@@ -112,14 +112,14 @@ if __name__ == '__main__':
 
 > Command
 
-<pre><code>usage: transcriptOrthology.py [-h] [-talg TRALIGNMENT]
-                              [-gtot GENETOTRANSCRIPTS] [-nhxt NHXGENETREE]
+<pre><code>usage: transcriptOrthology.py [-h] -talg TRALIGNMENT
+                              -gtot GENETOTRANSCRIPTS -nhxt NHXGENETREE
                               [-lowb LOWERBOUND] [-tsm TSMVALUE]
                               [-outf OUTPUTFOLDER]
 
 program parameters
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -talg TRALIGNMENT, --tralignment TRALIGNMENT
                         Multiple Sequences Alignment of transcripts in FASTA
@@ -281,6 +281,58 @@ __Outputs files__
 <!-- Getting started -->
 <h2 id="getting-started-2"> :rocket: Getting Started</h2>
 
+> Command
+
+<pre><code>
+usage: minclevol.py [-h] -l LABEL -clus CLUSTERS -nhx NHX -map MAPPINGS -matx MATRIX [-join JOIN] [-outf OUTPUT] [-outp PREFIX]
+                    [-c COMPUTE]
+
+parsor program parameter
+
+options:
+  -h, --help            show this help message and exit
+  -l LABEL, --label LABEL
+                        0 | 1, Boolean variable controlling the utilization of the labeled version of the algorithm (0) or the non-  
+                        labeled version (1).
+  -clus CLUSTERS, --clusters CLUSTERS
+                        FASTA file containing cluster IDs in front of each id_transcript separated by semicolons
+  -nhx NHX, --nhx NHX   txt file containg gene tree format => NHX format
+  -map MAPPINGS, --mappings MAPPINGS
+                        FASTA file containg transcripts and their corresponding genes separated by semicolons.
+  -matx MATRIX, --matrix MATRIX
+                        CSV file containing matrix separated by comma ';'(header: True, index: True)Note: Index must correspond to   
+                        the header.
+  -join JOIN, --join JOIN
+                        min(1) | mean(0) | max(2). By default(1)
+  -outf OUTPUT, --output OUTPUT
+                        output folder
+  -outp PREFIX, --prefix PREFIX
+                        prefix of output files
+  -c COMPUTE, --compute COMPUTE
+                        0 | 1, Compute all solutions(By default False(1))
+  </code></pre>
+
+  
+> Usage example
+
+<pre><code>python3 ./scripts/minclevol.py -clus inputs/phylogenies/clusters.clus -nhx inputs/phylogenies/tree.nhx -map inputs/mappings.maps -matx inputs/matrix.matx -join 1 -outf ./outputs -outp 'test' -l 0 -c 0</code></pre>
+
+OR
+
+<pre><code>sh ./execution_inferring_transcript_phylogenies.sh</code></pre>
+
+> Output expected
+
+<pre><code>
+    🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟
+    🌟                                                                                            🌟
+    🌟   L-MinCLevol was successfully executed! Check the results in the output directory         🌟
+    🌟                                                                                            🌟
+    🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟
+
+</code></pre>
+
+                
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 
