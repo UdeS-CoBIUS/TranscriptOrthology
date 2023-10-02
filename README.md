@@ -2,8 +2,9 @@
 # :dna: Inferring Transcript Phylogenies from Clusters of Orthologous and Paralogous Transcripts :dna:
 
 <p align="center">
-<img src='./theme.png' alt='theme' width=auto height=300>
-<img src='./solution.svg' alt='theme-2' width=auto height=300>
+<img src='./theme.png' alt='theme' width=auto height=300><br>
+<img src='./solution.svg' alt='theme-2' width=auto height=500>
+<img src='./solution_2.svg' alt='theme-2' width=auto height=500>
 </p>
 
 :busts_in_silhouette: __Authors__
