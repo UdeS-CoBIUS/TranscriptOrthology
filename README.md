@@ -340,6 +340,18 @@ OR
 
 <h3 id="project-files-description-outputs-2"> :minidisc: Outputs description </h3>
 
+> the files solution.nhx and solution.svg
+
+> the CPU time (computing_time.txt)
+
+> dendogram 
+
+>> (me_tree.nwk)
+
+> ortholog_trees
+
+>> ortholog_group_X.nhx and ortholog_group_X.svg
+
 <h3 id="project-files-description-data-2"> :heavy_check_mark: Dataset </h3>
 
 ``The folder data contains dataset used for the studies and also the results obtained.``
