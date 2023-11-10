@@ -3,8 +3,6 @@
 
 <p align="center">
 <img src='./theme.png' alt='theme' width=auto height=300><br>
-<!--- <img src='./solution.svg' alt='theme-2' width=auto height=300> --->
-<!--- <img src='./solution_2.svg' alt='theme-2' width=auto height=300> --->
 </p>
 
 :busts_in_silhouette: __Authors__
@@ -19,14 +17,12 @@
 <h2 id="table-of-contents"> :book: Table of Contents</h2>
 
 <details open>
-  <summary><a href="#about-the-project">About the project</a></summary>
+<summary><a href="#clustering">Inferring clusters of orthologous and paralogous transcripts</a></summary>
+  <a href="#about-the-project">About the project</a>
     <ol><a href="#overview"> ➤ Overview</a></ol>
     <ol><a href="#os"> ➤ Operating System</a></ol>
     <ol><a href="#requirements"> ➤ Requirements</a></ol>
-</details>
-
-<details open>
-  <summary><a href="#clustering">Inferring clusters of orthologous and paralogous transcripts</a></summary>
+  
   <ol>
     <li><a href="#package"> ➤ Package Pypi</a></li>
     <li><a href="#getting-started"> ➤ Getting Started</a></li>
