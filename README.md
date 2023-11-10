@@ -29,37 +29,36 @@
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- ABOUT THE PROJECT -->
-<h1 id="about-the-project"> :pencil: About The Project</h1>
+<h1 name="about-the-project"> :pencil: About The Project</h1>
 
 
 <!-- OVERVIEW -->
-<h3 id="overview"> :cloud: Overview</h3>
+<h3 name="overview"> :cloud: Overview</h3>
 
 `We present an algorithm for inferring clusters of orthologous and paralogous transcripts.`
 
 <!-- OPERATING SYSTEM -->
-<h3 id="os"> :man_technologist: Operating System</h3>
+<h3 name="os"> :man_technologist: Operating System</h3>
 The program was both developed and tested on a system operating Ubuntu version 18.04.6 LTS.
 ---
 
 <!-- Requirements -->
-<h3 id="requirements"> :hammer_and_pick: Requirements</h3>
+<h3 name="requirements"> :hammer_and_pick: Requirements</h3>
 
 *   __`python3 (at leat python 3.6)`__
 *   __`NetworkX`__
 *   __`Pandas`__
 *   __`Numpy`__
 *   __`ETE toolkit`__
-*   __`phylotreelib`__
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 <!-- ABOUT THE PROJECT -->
-<h1 id="clustering"> Inferring clusters of orthologous and paralogous transcripts</h1>
+<h1 name="clustering"> Inferring clusters of orthologous and paralogous transcripts</h1>
 
 <!-- Package -->
-<h3 id="package"> :package: About the package</h3>
+<h3 name="package"> :package: About the package</h3>
 
 ``install the package``
 <pre><code>pip3 install transcriptorthology</code></pre>
@@ -174,10 +173,10 @@ OR
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-<h2 id="project-files-description"> :file_folder: Project Files Description</h2>
+<h2 name="project-files-description"> :file_folder: Project Files Description</h2>
 
 
-<h3 id="project-files-description-inputs"> :keyboard: Inputs description </h3>
+<h3 name="project-files-description-inputs"> :keyboard: Inputs description </h3>
 
 __Inputs files__
 <ul>
@@ -219,7 +218,7 @@ optional arguments:
 
 --- 
 
-<h3 id="project-files-description-outputs"> :minidisc: Outputs description </h3>
+<h3 name="project-files-description-outputs"> :minidisc: Outputs description </h3>
 
 __Outputs files__
 
@@ -230,7 +229,7 @@ __Outputs files__
     <li>:four: <b>orthologs.csv</b> : csv files resuming the information of the isoorthology-clustering.</li>
 </ul>
 
-<h3 id="project-files-description-data"> :heavy_check_mark: Dataset </h3>
+<h3 name="project-files-description-data"> :heavy_check_mark: Dataset </h3>
 
 ``The folder data contains dataset used for the studies and also the results obtained.``
 
