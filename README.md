@@ -26,7 +26,7 @@
     <a href="#requirements"> ➤ Requirements</a></ol>
 </details>
 
-<details>
+<details open>
   <summary><a href="#clustering">Inferring clusters of orthologous and paralogous transcripts</a></summary>
   <ol>
     <li><a href="#package"> ➤ Package Pypi</a></li>
@@ -41,20 +41,6 @@
   </ol>
 </details>
 
-<details>
-  <summary><a href="#phylogenies">Inferring Transcript Phylogenies</a></summary>
-  <ol>
-    <li><a href="#package-2"> ➤ Package Pypi</a></li>
-    <li><a href="#getting-started-2"> ➤ Getting Started</a></li>
-    <li><a href="#project-files-description-2"> ➤ Project files descriptions </a>
-    <ol>
-    <a href="#project-files-description-inputs-2"> ➤ Inputs description</a>
-    </ol>
-    <ol><a href="#project-files-description-outputs-2"> ➤ Outputs description</a></ol>
-    <ol><a href="#project-files-description-data-2"> ➤ Dataset</a></ol>
-    </ol></li>
-  </ol>
-</details>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
