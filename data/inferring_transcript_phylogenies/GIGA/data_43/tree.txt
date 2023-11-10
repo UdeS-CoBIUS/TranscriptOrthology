@@ -1,8 +1,0 @@
-joining fragments
-finished joining fragments
-making gene tree
-completed gene tree
-MAIN:inferred ancestral seqs
-MAIN:got branch lengths
-(((transcript33_MGP-PahariEiJ-G0020237:0.032,transcript33_ENSMUSG00000054036:0.054):0.070,(transcript34_ENSRNOG00000031503:0.000,transcript27_ENSRNOG00000031503:0.000):0.062):0.091,((transcript37_ENSMUGG00000013649:0.000,transcript38_ENSMUGG00000013649:0.000,transcript40_ENSMUGG00000013649:0.000,transcript45_ENSMUGG00000013649:0.000,transcript46_ENSMUGG00000013649:0.000,transcript49_ENSMUGG00000013649:0.000,transcript27_ENSMUGG00000013649:0.000):0.011,transcript39_ENSMUGG00000013592:0.014):0.091);
-MAIN:printed gene tree

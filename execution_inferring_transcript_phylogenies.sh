@@ -1,1 +1,0 @@
-python3 ./scripts/minclevol.py -clus inputs/phylogenies/clusters.clus -nhx inputs/phylogenies/tree.nhx -map inputs/mappings.maps -matx inputs/matrix.matx -join 1 -outf ./outputs -outp 'test' -l 0 -c 0

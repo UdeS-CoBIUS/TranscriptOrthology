@@ -1,5 +1,0 @@
-id_transcript;recent-paralogs;ortho-orthologs;para-orthologs;#cluster
-transcript12_ENSMUNG00000002391;transcript24_ENSMUNG00000002391|0.988;null;null;0
-transcript24_ENSMUNG00000002391;transcript12_ENSMUNG00000002391|0.988;null;null;0
-transcript13_ENSMUNG00000002391;null;transcript1_ENSXMAG00000026005|0.945;null;1
-transcript1_ENSXMAG00000026005;null;transcript13_ENSMUNG00000002391|0.945;null;1
