@@ -17,12 +17,14 @@
 <h2 id="table-of-contents"> :book: Table of Contents</h2>
 
 <details open>
-<summary><a href="#clustering">Inferring clusters of orthologous and paralogous transcripts</a></summary>
-  <a href="#about-the-project">About the project</a>
+  <summary><a href="#about-the-project">About the project</a></summary>
     <ol><a href="#overview"> ➤ Overview</a></ol>
     <ol><a href="#os"> ➤ Operating System</a></ol>
     <ol><a href="#requirements"> ➤ Requirements</a></ol>
-  
+</details>
+
+<details open>
+  <summary><a href="#clustering">Inferring clusters of orthologous and paralogous transcripts</a></summary>
   <ol>
     <li><a href="#package"> ➤ Package Pypi</a></li>
     <li><a href="#getting-started"> ➤ Getting Started</a></li>
@@ -162,7 +164,7 @@ options:
 
 > Usage example
 
-<pre><code>python3 ./scripts/transcriptOrthology.py -talg ./execution/inputs/transcripts_alignments/ENSGT00390000000104.alg -gtot ./execution/inputs/mapping_gene_to_transcripts/ENSGT00390000000104.fasta -nhxt ./execution/inputs/NHX_trees/ENSGT00390000000104.nwk -lowb 0.7 -outf ./execution/outputs/ -tsm 1</code></pre>
+<pre><code>python3 ./scripts/transcriptOrthology.py -talg ./execution/inputs/transcripts_alignments/ENSGT00390000003967.alg -gtot ./execution/inputs/mapping_gene_to_transcripts/ENSGT00390000003967.fasta -nhxt ./execution/inputs/NHX_trees/ENSGT00390000003967.nhx -lowb 0.7 -outf ./execution/outputs/ -tsm 1</code></pre>
 OR
 <pre><code>sh ./execution_inferring_clusters.sh</code></pre>
 
@@ -238,7 +240,7 @@ __Outputs files__
     <li>:one: <b>matrix.csv</b> : similarity matrix score that present the tsm+ score between each pair of homologous transcripts.</li>
     <li>:two: <b>blocks_transcripts.csv|blocks_genes</b> : csv file describing the representation of blocks for each transcript(resp. gene).</li>
     <li>:three: <b>start_orthology_graph.pdf|end_orthology_graph.pdf</b> : orthology graph at the start of the algorithm(resp. at the end of the algorithm) showing only the pair relationships between recent-paralogs(resp. all the orthologous clusters). (:warning:only retrieved if the number of transcripts is not greater than 20)</li>
-    <li>:four: <b>groupsOfOrthoogs.csv|relationsOrthology.csv</b> : csv files resuming the information of the isoorthology-clustering.</li>
+    <li>:four: <b>orthologs.csv</b> : csv files resuming the information of the isoorthology-clustering.</li>
 </ul>
 
 <h3 id="project-files-description-data"> :heavy_check_mark: Dataset </h3>
