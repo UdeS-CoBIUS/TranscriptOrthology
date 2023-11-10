@@ -11,33 +11,20 @@
 > :bulb: If you are using our algorithm in your research, please cite our recent paper: __Upcoming__ 
 
 > :e-mail: __Contact: wend.yam.donald.davy.ouedraogo@usherbrooke.ca__
-
-
 <!-- TABLE OF CONTENTS -->
 <h2 id="table-of-contents"> :book: Table of Contents</h2>
 
-<details open>
-  <summary><a href="#about-the-project">About the project</a></summary>
-    <ol><a href="#overview"> ➤ Overview</a></ol>
-    <ol><a href="#os"> ➤ Operating System</a></ol>
-    <ol><a href="#requirements"> ➤ Requirements</a></ol>
-</details>
-
-<details open>
-  <summary><a href="#clustering">Inferring clusters of orthologous and paralogous transcripts</a></summary>
-  <ol>
-    <li><a href="#package"> ➤ Package Pypi</a></li>
-    <li><a href="#getting-started"> ➤ Getting Started</a></li>
-    <li><a href="#project-files-description"> ➤ Project files descriptions </a>
-    <ol>
-    <a href="#project-files-description-inputs"> ➤ Inputs description</a>
-    </ol>
-    <ol><a href="#project-files-description-outputs"> ➤ Outputs description</a></ol>
-    <ol><a href="#project-files-description-data"> ➤ Dataset</a></ol>
-    </ol></li>
-  </ol>
-</details>
-
+1. [➤ About the project](#about-the-project)
+    1. [➤ Overview](#overview)
+    2. [➤ Operating System](#os)
+    3. [➤ Requirements](#requirements)
+2. [➤ Inferring clusters of orthologous and paralogous transcripts](#clustering)
+    1. [➤ Package Pypi](#package)
+    2. [➤ Getting Started](#getting-started)
+    3. [➤ Project files descriptions](#project-files-description)
+        1. [➤ Inputs description](#project-files-description-inputs)
+        2. [➤ Inputs description](#project-files-description-outputs)
+        3. [➤ Inputs description](#project-files-description-data)
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
