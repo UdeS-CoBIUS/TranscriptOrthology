@@ -1,10 +1,10 @@
 
-# :dna: Inferring Transcript Phylogenies from Clusters of Orthologous and Paralogous Transcripts :dna:
+# :dna: Orthology and Paralogy at Transcript Level :dna:
 
 <p align="center">
 <img src='./theme.png' alt='theme' width=auto height=300><br>
-<img src='./solution.svg' alt='theme-2' width=auto height=300>
-<img src='./solution_2.svg' alt='theme-2' width=auto height=300>
+<!--- <img src='./solution.svg' alt='theme-2' width=auto height=300> --->
+<!--- <img src='./solution_2.svg' alt='theme-2' width=auto height=300> --->
 </p>
 
 :busts_in_silhouette: __Authors__
@@ -261,100 +261,7 @@ __Outputs files__
 
 ``The folder data contains dataset used for the studies and also the results obtained.``
 
-<br>
----
 
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-
-<!-- ABOUT THE PROJECT -->
-<h1 id="phylogenies"> Inferring phylogenies</h1>
-
-<!-- Package -->
-<h3 id="package"> :package: About the package</h3>
-
-``Upcoming``
-
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-
-
-<!-- Getting started -->
-<h2 id="getting-started-2"> :rocket: Getting Started</h2>
-
-> Command
-
-<pre><code>
-usage: minclevol.py [-h] -l LABEL -clus CLUSTERS -nhx NHX -map MAPPINGS -matx MATRIX [-join JOIN] [-outf OUTPUT] [-outp PREFIX]
-                    [-c COMPUTE]
-
-parsor program parameter
-
-options:
-  -h, --help            show this help message and exit
-  -l LABEL, --label LABEL
-                        0 | 1, Boolean variable controlling the utilization of the labeled version of the algorithm (0) or the non-  
-                        labeled version (1).
-  -clus CLUSTERS, --clusters CLUSTERS
-                        FASTA file containing cluster IDs in front of each id_transcript separated by semicolons
-  -nhx NHX, --nhx NHX   txt file containg gene tree format => NHX format
-  -map MAPPINGS, --mappings MAPPINGS
-                        FASTA file containg transcripts and their corresponding genes separated by semicolons.
-  -matx MATRIX, --matrix MATRIX
-                        CSV file containing matrix separated by comma ';'(header: True, index: True)Note: Index must correspond to   
-                        the header.
-  -join JOIN, --join JOIN
-                        min(1) | mean(0) | max(2). By default(1)
-  -outf OUTPUT, --output OUTPUT
-                        output folder
-  -outp PREFIX, --prefix PREFIX
-                        prefix of output files
-  -c COMPUTE, --compute COMPUTE
-                        0 | 1, Compute all solutions(By default False(1))
-  </code></pre>
-
-  
-> Usage example
-
-<pre><code>python3 ./scripts/minclevol.py -clus inputs/phylogenies/clusters.clus -nhx inputs/phylogenies/tree.nhx -map inputs/mappings.maps -matx inputs/matrix.matx -join 1 -outf ./outputs -outp 'test' -l 0 -c 0</code></pre>
-
-OR
-
-<pre><code>sh ./execution_inferring_transcript_phylogenies.sh</code></pre>
-
-> Output expected
-
-<pre><code>
-    🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟
-    🌟                                                                                            🌟
-    🌟   L-MinCLevol was successfully executed! Check the results in the output directory         🌟
-    🌟                                                                                            🌟
-    🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟
-
-</code></pre>
-
-                
-![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
-
-
-<h2 id="project-files-description-2"> :file_folder: Project Files Description</h2>
-
-<h3 id="project-files-description-outputs-2"> :minidisc: Outputs description </h3>
-
-> the files solution.nhx and solution.svg
-
-> the CPU time (computing_time.txt)
-
-> dendogram 
-
->> (me_tree.nwk)
-
-> ortholog_trees
-
->> ortholog_group_X.nhx and ortholog_group_X.svg
-
-<h3 id="project-files-description-data-2"> :heavy_check_mark: Dataset </h3>
-
-``The folder data contains dataset used for the studies and also the results obtained.``
 
 <br>
 <br>
