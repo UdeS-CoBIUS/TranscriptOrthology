@@ -33,7 +33,7 @@
     <li><a href="#getting-started"> ➤ Getting Started</a></li>
     <li><a href="#project-files-description"> ➤ Project files descriptions </a>
     <ol>
-    <a href="#project-files-description-inputs"> ➤ Inputs description</a>
+    <a href="/#project-files-description-inputs"> ➤ Inputs description</a>
     </ol>
     <ol><a href="#project-files-description-outputs"> ➤ Outputs description</a></ol>
     <ol><a href="#project-files-description-data"> ➤ Dataset</a></ol>
