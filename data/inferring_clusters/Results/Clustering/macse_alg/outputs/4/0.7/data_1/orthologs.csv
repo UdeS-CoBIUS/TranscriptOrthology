@@ -1,0 +1,17 @@
+id_transcript;recent-paralogs;ortho-orthologs;para-orthologs;#cluster
+transcript16_ggor;transcript17_ggor|1.0;transcript8_pabe|0.932&transcript21_hsap|0.935;null;0
+transcript17_ggor;transcript16_ggor|1.0;transcript8_pabe|0.932&transcript21_hsap|0.935;null;0
+transcript12_ppan;transcript20_ppan|1.0;transcript12_ptro|1.0&transcript12_hsap|0.987&transcript12_ggor|0.97;null;0
+transcript20_ppan;transcript12_ppan|1.0;transcript12_ptro|1.0;null;0
+transcript12_ptro;null;transcript12_ppan|1.0&transcript20_ppan|1.0&transcript12_hsap|0.995&transcript12_ggor|0.977&transcript8_pabe|1.0&transcript21_hsap|0.995;null;0
+transcript12_hsap;null;transcript12_ppan|0.987&transcript12_ptro|0.995&transcript12_ggor|0.959;null;0
+transcript12_ggor;null;transcript12_ppan|0.97&transcript12_ptro|0.977&transcript12_hsap|0.959;null;0
+transcript8_pabe;null;transcript16_ggor|0.932&transcript17_ggor|0.932&transcript12_ptro|1.0&transcript21_hsap|0.978;null;0
+transcript21_hsap;null;transcript16_ggor|0.935&transcript17_ggor|0.935&transcript12_ptro|0.995&transcript8_pabe|0.978;null;0
+transcript11_ggor;transcript18_ggor|0.97;transcript18_hsap|0.93;null;1
+transcript18_hsap;null;transcript11_ggor|0.93&transcript18_ggor|0.93;null;1
+transcript18_ggor;transcript11_ggor|0.97;transcript18_hsap|0.93;null;1
+transcript19_ggor;null;transcript19_hsap|0.967&transcript19_ppan|0.977;null;2
+transcript19_hsap;null;transcript19_ggor|0.967&transcript19_ppan|0.987;null;2
+transcript19_ppan;null;transcript19_ggor|0.977&transcript19_hsap|0.987;null;2
+transcript20_hsap;null;null;null;3

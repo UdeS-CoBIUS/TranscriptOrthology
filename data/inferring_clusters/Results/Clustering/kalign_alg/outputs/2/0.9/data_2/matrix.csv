@@ -1,0 +1,9 @@
+;transcript9_ptro;transcript11_hsap;transcript13_hsap;transcript31_hsap;transcript11_ggor;transcript12_ggor;transcript8_pabe;transcript18_pabe
+transcript9_ptro;1.0;0.286;0.583;0.583;0.286;0.6;0.467;0.467
+transcript11_hsap;0.286;1.0;0.167;0.167;1.0;0.222;0.133;0.133
+transcript13_hsap;0.583;0.167;1.0;1.0;0.167;0.75;0.8;0.8
+transcript31_hsap;0.583;0.167;1.0;1.0;0.167;0.75;0.8;0.8
+transcript11_ggor;0.286;1.0;0.167;0.167;1.0;0.222;0.133;0.133
+transcript12_ggor;0.6;0.222;0.75;0.75;0.222;1.0;0.6;0.6
+transcript8_pabe;0.467;0.133;0.8;0.8;0.133;0.6;1.0;1.0
+transcript18_pabe;0.467;0.133;0.8;0.8;0.133;0.6;1.0;1.0

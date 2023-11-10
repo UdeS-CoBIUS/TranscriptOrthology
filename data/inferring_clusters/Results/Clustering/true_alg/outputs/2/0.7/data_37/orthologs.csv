@@ -1,0 +1,4 @@
+id_transcript;recent-paralogs;ortho-orthologs;para-orthologs;#cluster
+transcript9_ENSMPUG00000020072;transcript12_ENSMPUG00000020072|1.0;null;null;0
+transcript12_ENSMPUG00000020072;transcript9_ENSMPUG00000020072|1.0;null;null;0
+transcript11_ENSMPUG00000020072;null;null;null;1

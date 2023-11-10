@@ -1,0 +1,15 @@
+id_transcript;recent-paralogs;ortho-orthologs;para-orthologs;#cluster
+transcript8_ENSMSIG00000000513;null;null;null;0
+transcript49_MGP-SPRETEiJ-G0021131;null;transcript49_ENSMSIG00000000513|0.995;null;1
+transcript49_ENSMSIG00000000513;null;transcript49_MGP-SPRETEiJ-G0021131|0.995;null;1
+transcript60_ENSMSIG00000000513;null;null;null;2
+transcript61_ENSMSIG00000000513;transcript62_ENSMSIG00000000513|0.983;null;null;3
+transcript62_ENSMSIG00000000513;transcript61_ENSMSIG00000000513|0.983;null;null;3
+transcript40_MGP-SPRETEiJ-G0021131;null;transcript38_MGP-PahariEiJ-G0020237|1.0&transcript38_MGP-CAROLIEiJ-G0020234|1.0&transcript46_ENSMUSG00000054036|1.0;null;4
+transcript38_MGP-PahariEiJ-G0020237;null;transcript40_MGP-SPRETEiJ-G0021131|1.0&transcript38_MGP-CAROLIEiJ-G0020234|1.0&transcript46_ENSMUSG00000054036|1.0;null;4
+transcript38_MGP-CAROLIEiJ-G0020234;null;transcript40_MGP-SPRETEiJ-G0021131|1.0&transcript38_MGP-PahariEiJ-G0020237|1.0&transcript46_ENSMUSG00000054036|1.0;null;4
+transcript46_ENSMUSG00000054036;null;transcript40_MGP-SPRETEiJ-G0021131|1.0&transcript38_MGP-PahariEiJ-G0020237|1.0&transcript38_MGP-CAROLIEiJ-G0020234|1.0;null;4
+transcript65_MGP-SPRETEiJ-G0021131;null;null;null;5
+transcript66_MGP-SPRETEiJ-G0021131;null;null;null;6
+transcript7_ENSMUSG00000054036;null;null;null;7
+transcript47_MGP-CAROLIEiJ-G0020234;null;null;null;8

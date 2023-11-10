@@ -1,0 +1,10 @@
+>transcript0_ppan
+MEVCAETVVFL
+>transcript0_ptro
+MEVCAETVVFL
+>transcript0_pabe
+MEVCAETVVFL
+>transcript0_ggor
+MEVCAEAVVFL
+>transcript0_hsap
+MEVCAETVVFL

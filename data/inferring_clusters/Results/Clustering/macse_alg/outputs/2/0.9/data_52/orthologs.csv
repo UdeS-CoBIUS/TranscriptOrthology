@@ -1,0 +1,16 @@
+id_transcript;recent-paralogs;ortho-orthologs;para-orthologs;#cluster
+transcript15_ENSPEMG00000024651;null;null;null;0
+transcript6_ENSMPUG00000020072;null;null;null;1
+transcript15_ENSCGRG00015005362;null;transcript15_ENSCGRG00001010245|1.0&transcript15_ENSCGRG00000018457|1.0&transcript25_ENSCPOG00000024843|0.921;null;2
+transcript15_ENSCGRG00001010245;null;transcript15_ENSCGRG00015005362|1.0&transcript15_ENSCGRG00000018457|1.0&transcript25_ENSCPOG00000024843|0.921;null;2
+transcript15_ENSCGRG00000018457;null;transcript15_ENSCGRG00015005362|1.0&transcript15_ENSCGRG00001010245|1.0&transcript25_ENSCPOG00000024843|0.921;null;2
+transcript25_ENSCPOG00000024843;null;transcript15_ENSCGRG00015005362|0.921&transcript15_ENSCGRG00001010245|0.921&transcript15_ENSCGRG00000018457|0.921;null;2
+transcript20_ENSECAG00000007947;transcript6_ENSECAG00000007947|1.0;null;null;3
+transcript6_ENSECAG00000007947;transcript20_ENSECAG00000007947|1.0;null;null;3
+transcript7_ENSECAG00000007947;null;null;null;4
+transcript19_ENSECAG00000007947;transcript21_ENSECAG00000007947|0.942;null;null;5
+transcript21_ENSECAG00000007947;transcript19_ENSECAG00000007947|0.942;null;null;5
+transcript7_ENSMLUG00000027828;null;null;null;6
+transcript13_ENSMLUG00000027828;null;null;null;7
+transcript36_ENSCGRG00000018457;null;null;null;8
+transcript15_ENSSTOG00000019743;null;null;null;9

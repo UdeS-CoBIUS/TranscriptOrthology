@@ -1,0 +1,8 @@
+id_transcript;recent-paralogs;ortho-orthologs;para-orthologs;#cluster
+transcript2_ENSLAFG00000030854;null;transcript22_ENSPEMG00000024651|0.856&transcript2_ENSSTOG00000019743|0.8;null;0
+transcript22_ENSPEMG00000024651;null;transcript2_ENSLAFG00000030854|0.856;null;0
+transcript27_ENSSTOG00000019743;transcript2_ENSSTOG00000019743|0.989;null;null;0
+transcript2_ENSSTOG00000019743;transcript27_ENSSTOG00000019743|0.989;transcript2_ENSLAFG00000030854|0.8;null;0
+transcript22_ENSSTOG00000019743;null;null;null;1
+transcript2_ENSNGAG00000018584;transcript22_ENSNGAG00000018584|0.964;null;null;2
+transcript22_ENSNGAG00000018584;transcript2_ENSNGAG00000018584|0.964;null;null;2

@@ -1,0 +1,8 @@
+id_transcript;recent-paralogs;ortho-orthologs;para-orthologs;#cluster
+transcript28_MGP-PahariEiJ-G0020237;null;transcript28_ENSMUSG00000054036|0.895&transcript28_MGP-CAROLIEiJ-G0020234|0.912;null;0
+transcript28_ENSMUSG00000054036;null;transcript28_MGP-PahariEiJ-G0020237|0.895&transcript28_MGP-CAROLIEiJ-G0020234|0.941;null;0
+transcript28_MGP-CAROLIEiJ-G0020234;null;transcript28_MGP-PahariEiJ-G0020237|0.912&transcript28_ENSMUSG00000054036|0.941;null;0
+transcript28_ENSRNOG00000031503;null;null;null;1
+transcript24_ENSRNOG00000031503;transcript7_ENSRNOG00000031503|0.991;null;null;2
+transcript7_ENSRNOG00000031503;transcript24_ENSRNOG00000031503|0.991;null;null;2
+transcript24_ENSNGAG00000018584;null;null;null;3
