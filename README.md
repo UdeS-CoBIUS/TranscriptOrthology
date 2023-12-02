@@ -105,6 +105,9 @@ options:
   -tsm TSMVALUE, --tsmvalue TSMVALUE
                         an integer(1|2|3|4|5|6) that refers to the transcript
                         similarity measure
+  -const CONSTRAINT, --constraint CONSTRAINT
+                        an integer(0|1), constraint for the selection of recent paralogs
+                        similarity measure
   -outf OUTPUTFOLDER, --outputfolder OUTPUTFOLDER
                         the output folder to store the results</code></pre>
 
@@ -150,7 +153,7 @@ options:
 
 > Usage example
 
-<pre><code>python3 ./scripts/transcriptOrthology.py -talg ./execution/inputs/transcripts_alignments/ENSGT00390000003967.alg -gtot ./execution/inputs/mapping_gene_to_transcripts/ENSGT00390000003967.fasta -nhxt ./execution/inputs/NHX_trees/ENSGT00390000003967.nhx -lowb 0.7 -outf ./execution/outputs/ -tsm 1</code></pre>
+<pre><code>python3 ./scripts/transcriptOrthology.py -talg ./execution/inputs/transcripts_alignments/ENSGT00390000003967.alg -gtot ./execution/inputs/mapping_gene_to_transcripts/ENSGT00390000003967.fasta -nhxt ./execution/inputs/NHX_trees/ENSGT00390000003967.nhx -lowb 0.7 -outf ./execution/outputs/ -tsm 1 -const 1</code></pre>
 OR
 <pre><code>sh ./execution_inferring_clusters.sh</code></pre>
 
@@ -209,6 +212,7 @@ optional arguments:
   -gtot GENETOTRANSCRIPTS, --genetotranscripts GENETOTRANSCRIPTS
   -nhxt NHXGENETREE, --nhxgenetree NHXGENETREE
   -lowb LOWERBOUND, --lowerbound LOWERBOUND
+  -const CONSTRAINT,  --constraint CONSTRAINT
   -outf OUTPUTFOLDER, --outputfolder OUTPUTFOLDER </code></pre>
   </li>
   <li>:three:

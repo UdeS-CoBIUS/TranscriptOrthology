@@ -23,20 +23,22 @@ import argparse
 def build_arg_parser():
     '''Parsing function'''
     parser = argparse.ArgumentParser(description="parsor program parameter")
-    parser.add_argument('-m', '--matrix', default=None)
-    parser.add_argument('-gtot', '--genetotranscripts', default=None)
-    parser.add_argument('-nhxt', '--nhxgenetree', default=None)
+    parser.add_argument('-m', '--matrix', required=True)
+    parser.add_argument('-gtot', '--genetotranscripts', required=True)
+    parser.add_argument('-nhxt', '--nhxgenetree', required=True)
     parser.add_argument('-lowb', '--lowerbound', default=0.0)
+    parser.add_argument('-const', '--constraint', default=1)
     parser.add_argument('-outf', '--outputfolder', default='.')
+    
     return parser
 
-def get_orthology_graph(matrix, gtot_path, gt_path, lower_bound, output_folder):
+def get_orthology_graph(matrix, gtot_path, gt_path, lower_bound, constraint, output_folder):
     df_gtot = convert_inputs_data(gtot_path)
     # matrix = pd.read_csv(matrix_path, sep=';', index_col=0)
     try:
         start1 = time.time()
         print('+++++ Searching for recent-paralogs ... \tstatus: processing')
-        recent_paralogs = search_recent_paralogs(matrix, df_gtot)
+        recent_paralogs = search_recent_paralogs(matrix, df_gtot, constraint)
         end1 = time.time()
         print('+++++ Searching for recent-paralogs ... \tstatus: finished in {} seconds'.format(str(end1-start1)))
     except:
@@ -82,7 +84,7 @@ def convert_inputs_data(gtot_path):
             df_gtot.loc[row_gtot] = [row_gtot.split(':')[0].split('>')[-1], row_gtot.split(':')[-1]]
     return df_gtot
 
-def search_recent_paralogs(matrix, g):
+def search_recent_paralogs(matrix, g, constraint):
     all_transcripts = list(g.id_transcript.values)
     dict_inParalogs = {}
 
@@ -104,23 +106,28 @@ def search_recent_paralogs(matrix, g):
                     all_tr_matrix = matrix[matrix.index==transcript][all_transcripts_without_tr]
                     max_value_outParalogs = max(all_tr_matrix.values[0])
                     tr_outParalogs = list(all_tr_matrix.apply(lambda row: row[row == max_value_outParalogs].index, axis=1)[0].values)
-                    if len(tr_inParalogs) > 1 or len(tr_inParalogs)==1:
+                    if len(tr_inParalogs) >= 1:
                         list_inParalogs = []
                         for tr_inParalog in tr_inParalogs:
                             if tr_inParalog in tr_outParalogs:
-                                transcripts_without_tr_ref = [tr for tr in transcripts if tr != tr_inParalog]
-                                tr_matrix_ref = matrix[matrix.index==tr_inParalog][transcripts_without_tr_ref]
-                                max_value_inParalogs_ref = max(tr_matrix_ref.values[0])
-                                if max_value_inParalogs_ref != 0:
-                                    tr_inParalogs_ref = list(tr_matrix_ref.apply(lambda row: row[row == max_value_inParalogs_ref].index, axis=1)[0].values)
-                                    all_transcripts_without_tr_ref = [tr for tr in all_transcripts if tr != tr_inParalog]
-                                    all_tr_matrix_ref = matrix[matrix.index==tr_inParalog][all_transcripts_without_tr_ref]
-                                    max_value_outParalogs_ref = max(all_tr_matrix_ref.values[0])
-                                    tr_outParalogs_ref = list(all_tr_matrix_ref.apply(lambda row: row[row == max_value_outParalogs_ref].index, axis=1)[0].values)
-                                    intersect_trs = list(set(tr_inParalogs_ref).intersection(set(tr_outParalogs_ref)))
-                                    if transcript in intersect_trs:
-                                        # before adding we need to check if 
-                                        list_inParalogs.append(tr_inParalog)
+                                if constraint == 0:
+                                    list_inParalogs.append(tr_inParalog)
+                                elif constraint == 1:
+                                    transcripts_without_tr_ref = [tr for tr in transcripts if tr != tr_inParalog]
+                                    tr_matrix_ref = matrix[matrix.index==tr_inParalog][transcripts_without_tr_ref]
+                                    max_value_inParalogs_ref = max(tr_matrix_ref.values[0])
+                                    if max_value_inParalogs_ref != 0:
+                                        tr_inParalogs_ref = list(tr_matrix_ref.apply(lambda row: row[row == max_value_inParalogs_ref].index, axis=1)[0].values)
+                                        all_transcripts_without_tr_ref = [tr for tr in all_transcripts if tr != tr_inParalog]
+                                        all_tr_matrix_ref = matrix[matrix.index==tr_inParalog][all_transcripts_without_tr_ref]
+                                        max_value_outParalogs_ref = max(all_tr_matrix_ref.values[0])
+                                        tr_outParalogs_ref = list(all_tr_matrix_ref.apply(lambda row: row[row == max_value_outParalogs_ref].index, axis=1)[0].values)
+                                        intersect_trs = list(set(tr_inParalogs_ref).intersection(set(tr_outParalogs_ref)))
+                                        if transcript in intersect_trs:
+                                            # before adding we need to check if 
+                                            list_inParalogs.append(tr_inParalog)
+                                else:
+                                    raise ValueError('Inappropriate argument value of constraint [--const]')
                         dict_inParalogs[transcript] = list_inParalogs
                     else:
                         dict_inParalogs[transcript] = []
@@ -404,6 +411,7 @@ if __name__ == '__main__':
     gt_path = args.nhxgenetree
     lower_bound = float(args.lowerbound)
     output_folder_path = args.outputfolder
+    constraint = int(args.constraint)
 
     #compute the algorithm
-    get_orthology_graph(matrix_path, gtot_path, gt_path, lower_bound, output_folder_path)
+    get_orthology_graph(matrix_path, gtot_path, gt_path, lower_bound, constraint, output_folder_path)
