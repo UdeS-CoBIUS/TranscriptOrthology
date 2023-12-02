@@ -72,9 +72,10 @@ if __name__ == '__main__':
   lower_bound = 0.7
   transcripts_msa_path = './execution/transcripts_alignments/ENSGT00390000000080.alg'
   tsm_conditions = 2
+  constraint = 1
   output_folder = './execution/output_folder'
   
-  <span style="color:red;">inferring_transcripts_isoorthology</span>(<span style="color:red;">transcripts_msa_path</span>, <span style="color:green;">gtot_path</span>, <span style="color:purple;">gt_path</span>, <span style="color:orange;">tsm_conditions</span>, <span style="color:yellow;">lower_bound</span>, <span style="color:gray;">output_folder</span>)</code></pre>
+  <span style="color:red;">inferring_transcripts_isoorthology</span>(<span style="color:red;">transcripts_msa_path</span>, <span style="color:green;">gtot_path</span>, <span style="color:purple;">gt_path</span>, <span style="color:orange;">tsm_conditions</span>, <span style="color:yellow;">lower_bound</span>, <span style="color:gray;">constraint</span>, <span style="color:gray;">output_folder</span>)</code></pre>
 
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
@@ -143,6 +144,11 @@ options:
     <td>-tsm </br>--tsmvalue</td>
     <td>The similarity mesure(mean, length, unitary)</td>
     <td>integer 1(tsm+unitary) | 2(tsm+length) | 3(tsm+mean) | 4(tsm++unitary) | 5(tsm++length) | 6(tsm++mean)</td>
+  </tr>
+  <tr>
+    <td>-const</br>--constraint</td>
+    <td>constraint for the selection of recent paralogs</td>
+    <td>0(not reciprocal) | 1(reciprocal)</td>
   </tr>
   <tr>
     <td>-outf </br> --outputfolder</td>
