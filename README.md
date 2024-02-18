@@ -8,7 +8,7 @@
 :busts_in_silhouette: __Authors__
 * __Wend Yam Donald Davy Ouedraogo & Aida Ouangraoua__, CoBIUS LAB, Department of Computer Science, Faculty of Science, Université de Sherbrooke, Sherbrooke, Canada*
 
-> :bulb: If you are using our algorithm in your research, please cite our recent paper: __Upcoming__ 
+> :bulb: If you are using our algorithm in your research, please cite our recent paper: __Ouedraogo, W. Y. D. D., & Ouangraoua, A. (2023, April). Inferring Clusters of Orthologous and Paralogous Transcripts. In RECOMB International Workshop on Comparative Genomics (pp. 19-34).__ 
 
 > :e-mail: __Contact: wend.yam.donald.davy.ouedraogo@usherbrooke.ca__
 <!-- TABLE OF CONTENTS -->
